@@ -58,22 +58,26 @@ const Wrapper = styled.div`
 
 const WindowsNavBar = styled.div`
   position: absolute;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   top: 0;
   height: 2.5em;
-  background-color: ${Colors.white};  
+  background-color: ${Colors.lightGrey};
+  overflow: none;
+  
 `;
 
 const WindowsNavBarRight = WindowsNavBar.extend`
   justify-content: flex-end;
+  background-color: ${Colors.transparent};
   width: 25%;
   right: 0;
 `;
 
 const WindowsNavBarLeft = WindowsNavBar.extend`
   justify-content: flex-start;
-  width: 75%;
+  width: 100%;
   left: 0;
 `;
 
@@ -105,7 +109,7 @@ const WindowsToolMaximize = WindowsTool.extend`
 const WindowsToolLeft = WindowsTool.extend`
   transform: scale(.83);
   width: 100%;
-  margin-left: -2.5em;
+  margin-left: -3.0em;
   &:hover {
     background-color: ${Colors.transparent};
   }
