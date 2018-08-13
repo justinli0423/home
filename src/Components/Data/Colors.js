@@ -9,7 +9,7 @@ const colors = {
   spaceBlack: '#090A0F',
   grey: '#C0C0C0',
   transparent: 'rgba(0, 0, 0, 0)',
-  translucentWhite: 'rgba(255, 255, 255, .1)',
+  translucentWhite: 'rgba(255, 255, 255, .2)',
 };
 
 export default colors;
