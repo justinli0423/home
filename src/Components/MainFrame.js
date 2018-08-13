@@ -33,9 +33,9 @@ export default class MainFrame extends Component {
           <WindowsToolMaximize>
             <FontAwesomeIcon icon={faWindowMaximize} />
           </WindowsToolMaximize>
-          <WindowsTool>
+          <WindowsToolClose>
             X
-          </WindowsTool>
+          </WindowsToolClose>
         </WindowsNavBarRight>
         <CommandLine />
       </Wrapper>
@@ -52,6 +52,8 @@ const Wrapper = styled.div`
   height: 50em;
   transform: translate(-50%, -50%);
   background-color: ${Colors.black};
+  box-shadow: 1px 5px 3px ${Colors.black};
+  border: .5px solid ${Colors.lightGrey2};
 `;
 
 const WindowsNavBar = styled.div`
@@ -86,6 +88,12 @@ const WindowsTool = styled.div`
   transition: .06s all linear;
   &:hover {
     background-color: ${Colors.lightGrey2};
+  }
+`;
+
+const WindowsToolClose = WindowsTool.extend`
+  &:hover {
+    background-color: ${Colors.red};
   }
 `;
 
