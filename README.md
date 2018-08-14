@@ -3,6 +3,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+## Potential commands
+current:
+ - cls/clear (clears screen)
+future:
+ - npm help (list all commands)
+ - npm start git
+ - npm start linkedin
+ - npm start resume
+ - npm show languages (show languages)
+ - npm show tools (shows tools)
+ - exit/logout/logoff (closes 'program')
+ - windows run logoff  (logs user off -> will show login screen)
+ - windows run shutdown (simulates shutdown and potentially close tab)
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
