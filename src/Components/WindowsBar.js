@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import windows10Logo from '../img/windows-brands.svg';
 import windows10Cortana from '../img/circle-regular.svg';
@@ -10,16 +9,9 @@ import windows10WifiOn from '../img/wifi-solid-on.svg';
 import windows10WifiOff from '../img/wifi-solid-off.svg';
 import windows10Mute from '../img/volume-off-solid.svg';
 
+import Services from './Service/Services';
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
-
-function getCurrentTime() {
-  const currentTime = moment();
-  return {
-    time: currentTime.format('HH:mm A'),
-    date: currentTime.format('YYYY-MM-DD'),
-  };
-}
 
 class WindowsBar extends Component {
   constructor(props) {
@@ -33,13 +25,13 @@ class WindowsBar extends Component {
 
   componentDidMount() {
     this.setState({
-      currentTime: getCurrentTime().time,
-      currentDate: getCurrentTime().date,
+      currentTime: Services.getCurrentTime().time,
+      currentDate: Services.getCurrentTime().date,
     });
 
     setInterval(() => this.setState({
-      currentTime: getCurrentTime().time,
-      currentDate: getCurrentTime().date,
+      currentTime: Services.getCurrentTime().time,
+      currentDate: Services.getCurrentTime().date,
     }), 1000);
   }
 

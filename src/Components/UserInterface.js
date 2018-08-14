@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import Service from './Service/Services';
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
 
@@ -17,14 +18,6 @@ import CommandPrompt from './Data/CommandPrompt';
 // - exit/logout/logoff (closes 'program')
 // - windows run logoff  (logs user off -> will show login screen)
 // - windows run shutdown (simulates shutdown and potentially close tab)
-function commandValidator(command) {
-  return new Promise((resolve, reject) => {
-    if (command === 'cls' || command === 'clear') {
-      return resolve('clear');
-    }
-    return reject(new Error('invalid Command'));
-  });
-}
 
 class UserInterface extends Component {
   constructor(props) {
@@ -84,7 +77,7 @@ class UserInterface extends Component {
     e.preventDefault();
     const { lineInputAmounts } = this.state;
 
-    commandValidator(this.autoFocusRef.value)
+    Service.commandValidator(this.autoFocusRef.value)
       .then((status) => {
         if (status === 'clear') {
           this.setState({
