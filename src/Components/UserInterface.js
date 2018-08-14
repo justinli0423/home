@@ -85,6 +85,7 @@ class UserInterface extends Component {
       });
 
     // this is always here to create next line
+    // not sure why .finally() isn't working...
     this.setState({
       lineInputAmounts: lineInputAmounts + 1,
     });

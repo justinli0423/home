@@ -6,6 +6,9 @@ import windows10Logo from '../img/windows-brands.svg';
 import windows10Cortana from '../img/circle-regular.svg';
 import windows10Microphone from '../img/microphone-solid.svg';
 import windows10Notification from '../img/comment-alt-regular.svg';
+import windows10WifiOn from '../img/wifi-solid-on.svg';
+import windows10WifiOff from '../img/wifi-solid-off.svg';
+import windows10Mute from '../img/volume-off-solid.svg';
 
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
@@ -24,6 +27,7 @@ class WindowsBar extends Component {
     this.state = {
       currentTime: '00:00',
       currentDate: '2000-00-00',
+      cmdStatus: true,
     };
   }
 
@@ -43,10 +47,18 @@ class WindowsBar extends Component {
     clearInterval(this.interval);
   }
 
+  toggleCmdStatus() {
+    const { cmdStatus } = this.state;
+    this.setState({
+      cmdStatus: !cmdStatus,
+    });
+  }
+
   render() {
     const {
       currentTime,
       currentDate,
+      cmdStatus,
     } = this.state;
 
     return (
@@ -71,6 +83,8 @@ class WindowsBar extends Component {
         <Language>
           { CommandPrompt.windowsNavbar[1] }
         </Language>
+        <WindowsPullRight src={windows10Mute} />
+        <WindowsPullRightEnd onClick={this.toggleCmdStatus.bind(this)} src={cmdStatus ? windows10WifiOn : windows10WifiOff} />
       </Wrapper>
     );
   }
@@ -116,6 +130,10 @@ const Windows = styled.img`
 const WindowsPullRight = Windows.extend`
   float: right;
   font-size: 1em;
+`;
+
+const WindowsPullRightEnd = WindowsPullRight.extend`
+  padding: 1em 0;
 `;
 
 const WindowsCortana = Windows.extend`
