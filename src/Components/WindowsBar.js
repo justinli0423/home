@@ -84,7 +84,7 @@ class WindowsBar extends Component {
           { CommandPrompt.windowsNavbar[1] }
         </Language>
         <WindowsPullRight src={windows10Mute} />
-        <WindowsPullRightEnd onClick={this.toggleCmdStatus.bind(this)} src={cmdStatus ? windows10WifiOn : windows10WifiOff} />
+        <WindowsPullRightEnd onClick={() => this.toggleCmdStatus()} src={cmdStatus ? windows10WifiOn : windows10WifiOff} />
       </Wrapper>
     );
   }

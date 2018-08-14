@@ -61,7 +61,7 @@ class UserInterface extends Component {
           id="UserInput"
         />
         <UserSubmit
-          onClick={this.userCommandInput.bind(this)}
+          onClick={obj => this.userCommandInput(obj)}
         />
       </UserInputFields>
     ));
