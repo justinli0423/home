@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import MainFrame from './Components/MainFrame';
+import WindowsBar from './Components/WindowsBar';
 
 import Colors from './Components/Data/Colors';
 
@@ -18,6 +19,7 @@ const App = () => (
   <Wrapper>
     { starCreator(5) }
     <MainFrame />
+    <WindowsBar />
   </Wrapper>
 );
 

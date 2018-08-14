@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { faWindowMaximize, faRocket } from '@fortawesome/free-solid-svg-icons';
 
 import CommandLine from './CommandLine';
 import Colors from './Data/Colors';
 
 const frameTitle = 'jli0423@WEBAPP: /mnt/c/Users/jli0423/git/jli0423.github.io';
+
+library.add(faWindowMaximize, faRocket);
 
 export default class MainFrame extends Component {
   componentWillMount() {

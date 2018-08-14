@@ -7,6 +7,10 @@ const Prompt = {
     'Welcome.',
     'For a list of options enter "npm help"',
   ],
+  windowsNavbar: [
+    'Do not type here to search',
+    'ENG',
+  ],
 };
 
 export default Prompt;
