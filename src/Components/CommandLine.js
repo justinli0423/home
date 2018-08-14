@@ -48,22 +48,36 @@ export default class CommandLine extends Component {
     clearInterval(this.interval);
   }
 
-  render() {
+  renderComponent() {
     const {
       welcomeStatement,
       introStatement,
+      introCount,
     } = this.state;
 
-    return (
-      <Wrapper>
-        <IntroStatements>
-          { welcomeStatement }
-          <br />
-          { introStatement }
-        </IntroStatements>
-        {introStatement.length === introduction.length && <UserInterface />}
-      </Wrapper>
-    );
+    if (introCount < 45) {
+      return (
+        <Wrapper>
+          <IntroStatements>
+            { welcomeStatement }
+            <br />
+            { introStatement }
+          </IntroStatements>
+        </Wrapper>
+      );
+    }
+    if (introCount > 55) {
+      return (
+        <WrapperUserInterface>
+          <UserInterface />
+        </WrapperUserInterface>
+      );
+    }
+    return <Wrapper />;
+  }
+
+  render() {
+    return this.renderComponent();
   }
 }
 
@@ -72,6 +86,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding-left: 5px;
+`;
+
+const WrapperUserInterface = Wrapper.extend`
+  margin-top: 2.5em;
 `;
 
 const IntroStatements = styled.div`

@@ -4,6 +4,16 @@ import styled from 'styled-components';
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
 
+// put all wanted commands here
+function commandValidator(command) {
+  return new Promise((resolve, reject) => {
+    if (command === 'cls' || command === 'clear') {
+      return resolve('clear');
+    }
+    return reject(new Error('invalid Command'));
+  });
+}
+
 class UserInterface extends Component {
   constructor(props) {
     super(props);
@@ -21,13 +31,22 @@ class UserInterface extends Component {
     this.autoFocusRef.focus();
   }
 
+  componentDidUpdate(prevProp, prevState) {
+    const { lineInputAmounts } = this.state;
+    if (prevState.lineInputAmounts > lineInputAmounts) {
+      this.setState({
+        lineInputAmounts: 1,
+      });
+    }
+  }
+
   inputCreator(num) {
-    const starArray = [];
+    const promptArray = [];
     for (let i = 0; i < num; i += 1) {
-      starArray.push(i);
+      promptArray.push(i);
     }
 
-    return starArray.map(() => (
+    return promptArray.map(() => (
       <UserInputFields>
         <UserInputLabelUser htmlFor="UserInput">
           { CommandPrompt.initializeStatement[0] }
@@ -50,11 +69,25 @@ class UserInterface extends Component {
 
   // override default onSubmit so page does not refresh
   userCommandInput(e) {
+    e.preventDefault();
     const { lineInputAmounts } = this.state;
+
+    commandValidator(this.autoFocusRef.value)
+      .then((status) => {
+        if (status === 'clear') {
+          this.setState({
+            lineInputAmounts: 0,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // this is always here to create next line
     this.setState({
       lineInputAmounts: lineInputAmounts + 1,
     });
-    e.preventDefault();
   }
 
   render() {
