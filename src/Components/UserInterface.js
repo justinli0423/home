@@ -13,6 +13,15 @@ class UserInterface extends Component {
 
   componentDidMount() {
     this.autoFocusRef.focus();
+    this.setState({
+      lineInputAmounts: 1,
+    });
+  }
+
+  // override default onSubmit so page does not refresh
+  userCommandInput(e) {
+    console.log(this.autoFocusRef.value);
+    e.preventDefault();
   }
 
   render() {
@@ -30,12 +39,15 @@ class UserInterface extends Component {
           name="userInput"
           id="UserInput"
         />
+        <UserSubmit
+          onClick={this.userCommandInput.bind(this)}
+        />
       </UserInputFields>
     );
   }
 }
 
-const UserInputFields = styled.div`
+const UserInputFields = styled.form`
   display: block;
   width: 100%;
   height: auto;
@@ -53,9 +65,14 @@ const UserInput = styled.input`
   }
 `;
 
+const UserSubmit = styled.button`
+  display: none;
+`;
+
 const UserInputLabelLocation = styled.span`
   color: ${Colors.darkBlue};
 `;
+
 const UserInputLabelUser = styled.span`
   color: ${Colors.green};
 `;
