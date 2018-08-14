@@ -59,7 +59,7 @@ export default class CommandLine extends Component {
           <br />
           { introStatement }
         </IntroStatements>
-        <UserInterface />
+        {introStatement.length === introduction.length && <UserInterface />}
       </Wrapper>
     );
   }
