@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Service from './Service/Services';
 import Colors from './Data/Colors';
@@ -20,6 +21,10 @@ import CommandPrompt from './Data/CommandPrompt';
 // - windows run shutdown (simulates shutdown and potentially close tab)
 
 class UserInterface extends Component {
+  static propTypes = {
+    triggerClearCommand: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     // creating reference to input
@@ -66,7 +71,7 @@ class UserInterface extends Component {
           id="UserInput"
         />
         <UserSubmit
-          onClick={obj => this.userCommandInput(obj)}
+          onClick={userInput => this.userCommandInput(userInput)}
         />
       </UserInputFields>
     ));
@@ -76,9 +81,11 @@ class UserInterface extends Component {
   userCommandInput(e) {
     e.preventDefault();
     const { lineInputAmounts } = this.state;
+    const { triggerClearCommand } = this.props;
 
     Service.commandValidator(this.autoFocusRef.value)
       .then((status) => {
+        triggerClearCommand();
         if (status === 'clear') {
           this.setState({
             lineInputAmounts: 0,

@@ -19,6 +19,7 @@ export default class CommandLine extends Component {
       introCount: 1,
       welcomeStatement: '',
       introStatement: '',
+      clearCommandCalled: false,
     });
   }
 
@@ -48,11 +49,18 @@ export default class CommandLine extends Component {
     clearInterval(this.interval);
   }
 
+  checkClearCommand() {
+    this.setState({
+      clearCommandCalled: true,
+    });
+  }
+
   renderComponent() {
     const {
       welcomeStatement,
       introStatement,
       introCount,
+      clearCommandCalled,
     } = this.state;
 
     if (introCount < 45) {
@@ -66,14 +74,25 @@ export default class CommandLine extends Component {
         </Wrapper>
       );
     }
-    if (introCount > 55) {
+
+    if (introCount > 45 && !clearCommandCalled) {
       return (
-        <WrapperUserInterface>
-          <UserInterface />
-        </WrapperUserInterface>
+        <Wrapper>
+          <IntroStatements>
+            { welcomeStatement }
+            <br />
+            { introStatement }
+          </IntroStatements>
+          <UserInterface triggerClearCommand={this.checkClearCommand.bind(this)} />
+        </Wrapper>
       );
     }
-    return <Wrapper />;
+
+    return (
+      <WrapperUserInterface>
+        <UserInterface />
+      </WrapperUserInterface>
+    );
   }
 
   render() {
