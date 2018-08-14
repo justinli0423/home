@@ -14,7 +14,6 @@ library.add(faWindowMaximize, faRocket);
 export default class MainFrame extends Component {
   componentWillMount() {
     this.setState({
-      FrameClicked: false,
     });
   }
 
