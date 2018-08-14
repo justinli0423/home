@@ -9,7 +9,7 @@ import CommandPrompt from './Data/CommandPrompt';
 const welcome = CommandPrompt.welcomeStatement[0];
 const introduction = CommandPrompt.welcomeStatement[1];
 // lower the number = faster the speed
-const typingSpeed = 60;
+const typingSpeed = 40;
 
 export default class CommandLine extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class CommandLine extends Component {
       introCount: 1,
       welcomeStatement: '',
       introStatement: '',
-      clearCommandCalled: false,
+      commandCalled: null,
     });
   }
 
@@ -49,50 +49,99 @@ export default class CommandLine extends Component {
     clearInterval(this.interval);
   }
 
-  checkClearCommand() {
+  commandCheck(command) {
     this.setState({
-      clearCommandCalled: true,
+      commandCalled: command,
     });
+  }
+
+  renderUserInterface() {
+    return (
+      <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
+    );
+  }
+
+  renderIntro() {
+    const {
+      welcomeStatement,
+      introStatement,
+    } = this.state;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { welcomeStatement }
+          <br />
+          { introStatement }
+        </HelperStatements>
+      </Wrapper>
+    );
+  }
+
+  renderIntroSecondary() {
+    const {
+      welcomeStatement,
+      introStatement,
+    } = this.state;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { welcomeStatement }
+          <br />
+          { introStatement }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderCleared() {
+    return (
+      <WrapperUserInterface>
+        <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
+      </WrapperUserInterface>
+    );
+  }
+
+  renderHelp() {
+    const {
+      npmHelp,
+    } = CommandPrompt;
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { npmHelp.map(statement => (
+            <span>
+              { statement }
+              <br />
+            </span>
+          )) }
+        </HelperStatements>
+        <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
+      </Wrapper>
+    );
   }
 
   renderComponent() {
     const {
-      welcomeStatement,
-      introStatement,
       introCount,
-      clearCommandCalled,
+      commandCalled,
     } = this.state;
 
     if (introCount < 45) {
-      return (
-        <Wrapper>
-          <IntroStatements>
-            { welcomeStatement }
-            <br />
-            { introStatement }
-          </IntroStatements>
-        </Wrapper>
-      );
+      return this.renderIntro();
     }
 
-    if (introCount > 45 && !clearCommandCalled) {
-      return (
-        <Wrapper>
-          <IntroStatements>
-            { welcomeStatement }
-            <br />
-            { introStatement }
-          </IntroStatements>
-          <UserInterface triggerClearCommand={this.checkClearCommand.bind(this)} />
-        </Wrapper>
-      );
+    if (introCount > 45 && commandCalled === 'clear') {
+      return this.renderCleared();
     }
 
-    return (
-      <WrapperUserInterface>
-        <UserInterface />
-      </WrapperUserInterface>
-    );
+    if (introCount > 45 && commandCalled === 'help') {
+      return this.renderHelp();
+    }
+
+    return this.renderIntroSecondary();
   }
 
   render() {
@@ -111,7 +160,7 @@ const WrapperUserInterface = Wrapper.extend`
   margin-top: 2.5em;
 `;
 
-const IntroStatements = styled.div`
+const HelperStatements = styled.div`
   display: block;
   margin-top: 2.5em;
   font-size: 1.2em;

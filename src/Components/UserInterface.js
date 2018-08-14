@@ -6,23 +6,9 @@ import Service from './Service/Services';
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
 
-// put all wanted commands here
-// current:
-// - cls/clear (clears screen)
-// future:
-// - npm help (list all commands)
-// - npm start git
-// - npm start linkedin
-// - npm start resume
-// - npm show languages (show languages)
-// - npm show tools (shows tools)
-// - exit/logout/logoff (closes 'program')
-// - windows run logoff  (logs user off -> will show login screen)
-// - windows run shutdown (simulates shutdown and potentially close tab)
-
 class UserInterface extends Component {
   static propTypes = {
-    triggerClearCommand: PropTypes.func.isRequired,
+    commandTrigger: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -50,6 +36,32 @@ class UserInterface extends Component {
     }
   }
 
+  // override default onSubmit so page does not refresh
+  userCommandInput(e) {
+    e.preventDefault();
+    const { lineInputAmounts } = this.state;
+    const { commandTrigger } = this.props;
+
+    Service.commandValidator(this.autoFocusRef.value)
+      .then((status) => {
+        commandTrigger(status);
+        if (status === 'clear' || status === 'help') {
+          this.setState({
+            lineInputAmounts: 0,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // this is always here to create next line
+    // not sure why .finally() isn't working...
+    this.setState({
+      lineInputAmounts: lineInputAmounts + 1,
+    });
+  }
+
   inputCreator(num) {
     const promptArray = [];
     for (let i = 0; i < num; i += 1) {
@@ -68,6 +80,10 @@ class UserInterface extends Component {
           innerRef={(focus) => { this.autoFocusRef = focus; }}
           type="text"
           name="userInput"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
           id="UserInput"
         />
         <UserSubmit
@@ -75,32 +91,6 @@ class UserInterface extends Component {
         />
       </UserInputFields>
     ));
-  }
-
-  // override default onSubmit so page does not refresh
-  userCommandInput(e) {
-    e.preventDefault();
-    const { lineInputAmounts } = this.state;
-    const { triggerClearCommand } = this.props;
-
-    Service.commandValidator(this.autoFocusRef.value)
-      .then((status) => {
-        triggerClearCommand();
-        if (status === 'clear') {
-          this.setState({
-            lineInputAmounts: 0,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // this is always here to create next line
-    // not sure why .finally() isn't working...
-    this.setState({
-      lineInputAmounts: lineInputAmounts + 1,
-    });
   }
 
   render() {
