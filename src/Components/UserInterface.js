@@ -39,10 +39,8 @@ const UserInputFields = styled.div`
   display: block;
   width: 100%;
   height: auto;
-  margin-top: 2em;
   color: ${Colors.white};
   font-size: 1.2em;
-  padding-left: 5px;
 `;
 
 const UserInput = styled.input`

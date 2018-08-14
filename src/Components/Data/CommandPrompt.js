@@ -5,7 +5,7 @@ const Prompt = {
   ],
   welcomeStatement: [
     'Welcome.',
-    'For a list of options enter "npm help"',
+    'For a list of options enter "npm help".',
   ],
   windowsNavbar: [
     'Do not type here to search',
