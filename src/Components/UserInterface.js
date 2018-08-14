@@ -11,21 +11,23 @@ class UserInterface extends Component {
     this.autoFocusRef = React.createRef();
   }
 
-  componentDidMount() {
-    this.autoFocusRef.focus();
+  componentWillMount() {
     this.setState({
       lineInputAmounts: 1,
     });
   }
 
-  // override default onSubmit so page does not refresh
-  userCommandInput(e) {
-    console.log(this.autoFocusRef.value);
-    e.preventDefault();
+  componentDidMount() {
+    this.autoFocusRef.focus();
   }
 
-  render() {
-    return (
+  inputCreator(num) {
+    const starArray = [];
+    for (let i = 0; i < num; i += 1) {
+      starArray.push(i);
+    }
+
+    return starArray.map(() => (
       <UserInputFields>
         <UserInputLabelUser htmlFor="UserInput">
           { CommandPrompt.initializeStatement[0] }
@@ -43,9 +45,32 @@ class UserInterface extends Component {
           onClick={this.userCommandInput.bind(this)}
         />
       </UserInputFields>
+    ));
+  }
+
+  // override default onSubmit so page does not refresh
+  userCommandInput(e) {
+    const { lineInputAmounts } = this.state;
+    this.setState({
+      lineInputAmounts: lineInputAmounts + 1,
+    });
+    e.preventDefault();
+  }
+
+  render() {
+    const { lineInputAmounts } = this.state;
+    return (
+      <Wrapper>
+        { this.inputCreator(lineInputAmounts) }
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  display: block;
+  width: 100%;
+`;
 
 const UserInputFields = styled.form`
   display: block;
@@ -57,6 +82,8 @@ const UserInputFields = styled.form`
 
 const UserInput = styled.input`
   outline: none;
+  width: calc(100% - 24.5em);
+  text-overflow: 1;
   background-color: ${Colors.transparent};
   border: none;
   color: ${Colors.white};

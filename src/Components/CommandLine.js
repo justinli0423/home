@@ -8,6 +8,8 @@ import CommandPrompt from './Data/CommandPrompt';
 
 const welcome = CommandPrompt.welcomeStatement[0];
 const introduction = CommandPrompt.welcomeStatement[1];
+// lower the number = faster the speed
+const typingSpeed = 60;
 
 export default class CommandLine extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ export default class CommandLine extends Component {
           introCount: introCount + 1,
         });
       }
-    }, 100);
+    }, typingSpeed);
   }
 
   componentWillUnmount() {
@@ -75,7 +77,7 @@ const Wrapper = styled.div`
 const IntroStatements = styled.div`
   display: block;
   margin-top: 2.5em;
-  font-size: 1em;
+  font-size: 1.2em;
   color: ${Colors.white};
   background-color: ${Colors.transparent};
 `;
