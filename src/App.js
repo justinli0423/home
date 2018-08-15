@@ -25,7 +25,7 @@ export default class App extends Component {
   }
 
   startUpFinished(startupPercentage) {
-    if (startupPercentage === 100) {
+    if (startupPercentage === 130) {
       this.setState({
         loadingState: 'login',
       });
