@@ -17,9 +17,11 @@ class UserInterface extends Component {
     this.autoFocusRef = React.createRef();
   }
 
+  // future: keep input history until clear/cls to be more terminal-like
   componentWillMount() {
     this.setState({
       lineInputAmounts: 1,
+      inputHistory: [],
     });
   }
 
@@ -45,13 +47,12 @@ class UserInterface extends Component {
     Service.commandValidator(this.autoFocusRef.value)
       .then((status) => {
         commandTrigger(status);
-        if (status === 'clear' || status === 'help') {
-          this.setState({
-            lineInputAmounts: 0,
-          });
-        }
+        this.setState({
+          lineInputAmounts: 0,
+        });
       })
       .catch((error) => {
+        commandTrigger('unknown');
         console.log(error);
       });
 

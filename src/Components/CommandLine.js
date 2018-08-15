@@ -99,7 +99,7 @@ export default class CommandLine extends Component {
   renderCleared() {
     return (
       <WrapperUserInterface>
-        <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
+        { this.renderUserInterface() }
       </WrapperUserInterface>
     );
   }
@@ -108,6 +108,7 @@ export default class CommandLine extends Component {
     const {
       npmHelp,
     } = CommandPrompt;
+
     return (
       <Wrapper>
         <HelperStatements>
@@ -118,7 +119,55 @@ export default class CommandLine extends Component {
             </span>
           )) }
         </HelperStatements>
-        <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderGit() {
+    const {
+      npmGit,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { npmGit[0] }
+          { npmGit[1] }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderLinkedin() {
+    const {
+      npmLinkedIn,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { npmLinkedIn[0] }
+          { npmLinkedIn[1] }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderResume() {
+    const {
+      npmResume,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { npmResume[0] }
+          { npmResume[1] }
+        </HelperStatements>
+        { this.renderUserInterface() }
       </Wrapper>
     );
   }
@@ -137,8 +186,20 @@ export default class CommandLine extends Component {
       return this.renderCleared();
     }
 
-    if (introCount > 45 && commandCalled === 'help') {
+    if (introCount > 45 && (commandCalled === 'help' || commandCalled === 'unknown')) {
       return this.renderHelp();
+    }
+
+    if (introCount > 45 && commandCalled === 'git') {
+      return this.renderGit();
+    }
+
+    if (introCount > 45 && commandCalled === 'linkedin') {
+      return this.renderLinkedin();
+    }
+
+    if (introCount > 45 && commandCalled === 'resume') {
+      return this.renderResume();
     }
 
     return this.renderIntroSecondary();

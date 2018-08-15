@@ -5,14 +5,16 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Current commands
  - cls/clear (clears screen)
- 
-## Future commands:
  - npm help (list all commands)
  - npm start git
  - npm start linkedin
  - npm start resume
+
+## WIP
  - npm show languages (show languages)
  - npm show tools (shows tools)
+ 
+## Future commands:
  - exit/logout/logoff (closes 'program')
  - windows run logoff  (logs user off -> will show login screen)
  - windows run shutdown (simulates shutdown and potentially close tab)
