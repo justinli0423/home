@@ -31,6 +31,11 @@ export default class App extends Component {
         loadingState: 'login',
       });
     }
+    if (startupPercentage === true) {
+      this.setState({
+        loadingState: 'mainScreen',
+      });
+    }
   }
 
   render() {
@@ -38,11 +43,11 @@ export default class App extends Component {
     return (
       <Wrapper>
         {loadingState === 'startup'
-        && <WindowsBootup loadingState={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
-        {loadingState === 'login'
-        && <WindowsLogin />}
+        && <WindowsBootup loadingStateFunc={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
+        {/* {loadingState === 'login'
+        && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
         { starCreator(5) }
-        {loadingState === 'mainScreen'
+        {loadingState === 'login'
         && (
         <div>
           <MainFrame />

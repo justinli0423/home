@@ -13,7 +13,7 @@ const incrementSpeed = 10;
 
 export default class WindowsBootup extends Component {
   static propTypes = {
-    loadingState: PropTypes.func.isRequired,
+    loadingStateFunc: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -27,13 +27,13 @@ export default class WindowsBootup extends Component {
   componentDidMount() {
     setInterval(() => {
       const { loadingPercentage } = this.state;
-      const { loadingState } = this.props;
+      const { loadingStateFunc } = this.props;
 
       if (loadingPercentage < 150) {
         this.setState({
           loadingPercentage: loadingPercentage + 1,
         });
-        loadingState(loadingPercentage + 1);
+        loadingStateFunc(loadingPercentage + 1);
       }
     }, incrementSpeed);
   }
