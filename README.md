@@ -18,6 +18,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
  - exit/logout/logoff (closes 'program')
  - windows run logoff  (logs user off -> will show login screen)
  - windows run shutdown (simulates shutdown and potentially close tab)
+ - **easter egg: sudo rm - rf ( simulates BSOD for jokes)
 
 ## Table of Contents
 
