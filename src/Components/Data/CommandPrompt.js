@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // \u00a0\u00a0 = space
 const Prompt = {
   startUp: 'Getting devices ready\u00a0\u00a0',
@@ -29,6 +31,26 @@ const Prompt = {
   npmResume: [
     'Resume: \u00a0\u00a0',
     'https://github.com/Jli0423/Resume/blob/master/JustinLiResume.pdf',
+  ],
+  npmLanguages: [
+    [
+      '<pre><code>  _                                                    ',
+      '  | |    __ _ _ __   __ _ _   _  __ _  __ _  ___  ___  ',
+      '  | |   / _ `| `_ \ / _` | | | |/ _` |/ _` |/ _ \/ __| ',
+      '  | |__| (_| | | | | (_| | |_| | (_| | (_| |  __/\__ \ ',
+      '  |_____\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/ ',
+      '                    |___/             |___/            ',
+      '</ code></ pre>',
+    ],
+  ],
+  npmSkills: [
+    [
+      '  ____  _    _ _ _      ',
+      ' / ___|| | _(_) | |___  ',
+      ' \___ \| |/ / | | / __| ',
+      '  ___) |   <| | | \__ \ ',
+      ' |____/|_|\_\_|_|_|___/ ',
+    ],
   ],
   windowsNavbar: [
     'Do not type here to search',

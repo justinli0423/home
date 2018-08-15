@@ -178,6 +178,30 @@ export default class CommandLine extends Component {
     );
   }
 
+  renderLanguages() {
+    const {
+      npmLanguages,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          {npmLanguages[0].map((asciiPart) => {
+            const languagesAscii = { __html: asciiPart };
+            return (
+              <span>
+                <span dangerouslySetInnerHTML={languagesAscii} />
+                <br />
+              </span>
+            );
+          })
+          }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
   renderComponent() {
     const {
       introCount,
@@ -188,24 +212,34 @@ export default class CommandLine extends Component {
       return this.renderIntro();
     }
 
-    if (introCount > 45 && commandCalled === 'clear') {
-      return this.renderCleared();
-    }
+    if (introCount > 45) {
+      if (commandCalled === 'clear') {
+        return this.renderCleared();
+      }
 
-    if (introCount > 45 && (commandCalled === 'help' || commandCalled === 'unknown')) {
-      return this.renderHelp();
-    }
+      if (commandCalled === 'help' || commandCalled === 'unknown') {
+        return this.renderHelp();
+      }
 
-    if (introCount > 45 && commandCalled === 'git') {
-      return this.renderGit();
-    }
+      if (commandCalled === 'git') {
+        return this.renderGit();
+      }
 
-    if (introCount > 45 && commandCalled === 'linkedin') {
-      return this.renderLinkedin();
-    }
+      if (commandCalled === 'linkedin') {
+        return this.renderLinkedin();
+      }
 
-    if (introCount > 45 && commandCalled === 'resume') {
-      return this.renderResume();
+      if (commandCalled === 'resume') {
+        return this.renderResume();
+      }
+
+      if (commandCalled === 'languages') {
+        return this.renderLanguages();
+      }
+
+      if (commandCalled === 'tools') {
+        return this.renderTools();
+      }
     }
 
     return this.renderIntroSecondary();
