@@ -33,7 +33,7 @@ export default class MainFrame extends Component {
           </WindowsToolLeft>
         </WindowsNavBarLeft>
         <WindowsNavBarRight>
-          <WindowsTool>
+          <WindowsTool onClick={() => { this.closeCmd(); }}>
             -
           </WindowsTool>
           <WindowsToolMaximize>

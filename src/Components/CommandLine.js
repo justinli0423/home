@@ -133,7 +133,9 @@ export default class CommandLine extends Component {
       <Wrapper>
         <HelperStatements>
           { npmGit[0] }
-          { npmGit[1] }
+          <NpmLink target="_blank" href={npmGit[1]}>
+            { npmGit[1] }
+          </NpmLink>
         </HelperStatements>
         { this.renderUserInterface() }
       </Wrapper>
@@ -149,7 +151,9 @@ export default class CommandLine extends Component {
       <Wrapper>
         <HelperStatements>
           { npmLinkedIn[0] }
-          { npmLinkedIn[1] }
+          <NpmLink target="_blank" href={npmLinkedIn[1]}>
+            { npmLinkedIn[1] }
+          </NpmLink>
         </HelperStatements>
         { this.renderUserInterface() }
       </Wrapper>
@@ -165,7 +169,9 @@ export default class CommandLine extends Component {
       <Wrapper>
         <HelperStatements>
           { npmResume[0] }
-          { npmResume[1] }
+          <NpmLink target="_blank" href={npmResume[1]}>
+            { npmResume[1] }
+          </NpmLink>
         </HelperStatements>
         { this.renderUserInterface() }
       </Wrapper>
@@ -227,4 +233,11 @@ const HelperStatements = styled.div`
   font-size: 1.2em;
   color: ${Colors.white};
   background-color: ${Colors.transparent};
+`;
+
+const NpmLink = styled.a`
+  color: ${Colors.white};
+  &:hover {
+    color: ${Colors.lightGrey2};
+  }
 `;
