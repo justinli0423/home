@@ -16,11 +16,6 @@ export default class MainFrame extends Component {
     exitFunction: PropTypes.func.isRequired,
   }
 
-  componentWillUnmount() {
-    const { exitFunction } = this.props;
-    exitFunction();
-  }
-
   closeCmd() {
     const { exitFunction } = this.props;
     exitFunction();

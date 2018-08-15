@@ -26,7 +26,7 @@ class WindowsBar extends Component {
     this.state = {
       currentTime: '00:00',
       currentDate: '2000-00-00',
-      cmdStatus: true,
+      cmdStatus: false,
     };
   }
 
@@ -45,9 +45,8 @@ class WindowsBar extends Component {
   componentDidUpdate(prevProps) {
     const { cmdToggleStatus } = this.props;
     if (prevProps.cmdToggleStatus && !cmdToggleStatus) {
-      console.log('workrs');
       this.setState({
-        cmdStatus: cmdToggleStatus,
+        cmdStatus: false,
       });
     }
   }
@@ -69,7 +68,7 @@ class WindowsBar extends Component {
 
   toggleCmdDisplay() {
     const { cmdStatus } = this.state;
-    if (cmdStatus) {
+    if (!cmdStatus) {
       return (
         <WindowsCmd
           src={windows10Cmd}
