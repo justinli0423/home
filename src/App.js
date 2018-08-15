@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import MainFrame from './Components/MainFrame';
 import WindowsBar from './Components/WindowsBar';
+import WindowsBootup from './Components/WindowsBootup';
 
 import Colors from './Components/Data/Colors';
 
@@ -15,13 +16,35 @@ function starCreator(num) {
   return starArray.map(() => <ParallaxStar />);
 }
 
-const App = () => (
-  <Wrapper>
-    { starCreator(5) }
-    <MainFrame />
-    <WindowsBar />
-  </Wrapper>
-);
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingState: 'startup',
+    };
+  }
+
+  startUpFinished(startupPercentage) {
+    if (startupPercentage === 100) {
+      this.setState({
+        loadingState: 'login',
+      });
+    }
+  }
+
+  render() {
+    const { loadingState } = this.state;
+    return (
+      <Wrapper>
+        {loadingState === 'startup'
+        && <WindowsBootup loadingState={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
+        { starCreator(5) }
+        <MainFrame />
+        <WindowsBar />
+      </Wrapper>
+    );
+  }
+}
 
 const parallaxStarsZoom = keyframes`
   0% {
@@ -91,5 +114,3 @@ const ParallaxStar = styled.div`
     animation-delay: 4s;
   }
 `;
-
-export default App;

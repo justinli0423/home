@@ -1,5 +1,6 @@
 // \u00a0\u00a0 = space
 const Prompt = {
+  startUp: 'Getting devices ready\u00a0\u00a0',
   initializeStatement: [
     'jli0423@WEBAPP: ',
     '/mnt/c/Users/jli0423.github.io$ ',

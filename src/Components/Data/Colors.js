@@ -13,6 +13,7 @@ const colors = {
   transparent: 'rgba(0, 0, 0, 0)',
   translucentWhite: 'rgba(255, 255, 255, .2)',
   translucentBlack: 'rgba(0, 0, 0, .65)',
+  windowsLightBlue: '#0078d7',
 };
 
 export default colors;
