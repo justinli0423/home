@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import MainFrame from './Components/MainFrame';
 import WindowsBar from './Components/WindowsBar';
 import WindowsBootup from './Components/WindowsBootup';
+import WindowsLogin from './Components/WindowsLogin';
 
 import Colors from './Components/Data/Colors';
 
@@ -38,9 +39,16 @@ export default class App extends Component {
       <Wrapper>
         {loadingState === 'startup'
         && <WindowsBootup loadingState={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
+        {loadingState === 'login'
+        && <WindowsLogin />}
         { starCreator(5) }
-        <MainFrame />
-        <WindowsBar />
+        {loadingState === 'mainScreen'
+        && (
+        <div>
+          <MainFrame />
+          <WindowsBar />
+        </div>
+        )}
       </Wrapper>
     );
   }
