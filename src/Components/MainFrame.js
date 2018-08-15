@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import CommandLine from './CommandLine';
 import Colors from './Data/Colors';
@@ -11,9 +12,18 @@ const frameTitle = 'jli0423@WEBAPP: /mnt/c/Users/jli0423/git/jli0423.github.io';
 
 
 export default class MainFrame extends Component {
-  componentWillMount() {
-    this.setState({
-    });
+  static propTypes = {
+    exitFunction: PropTypes.func.isRequired,
+  }
+
+  componentWillUnmount() {
+    const { exitFunction } = this.props;
+    exitFunction();
+  }
+
+  closeCmd() {
+    const { exitFunction } = this.props;
+    exitFunction();
   }
 
   render() {
@@ -34,7 +44,7 @@ export default class MainFrame extends Component {
           <WindowsToolMaximize>
             <img src={Windows10Maximize} alt="max" />
           </WindowsToolMaximize>
-          <WindowsToolClose>
+          <WindowsToolClose onClick={() => { this.closeCmd(); }}>
             X
           </WindowsToolClose>
         </WindowsNavBarRight>

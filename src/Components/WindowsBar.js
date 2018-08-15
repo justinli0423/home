@@ -7,7 +7,7 @@ import windows10Cortana from '../img/circle-regular.svg';
 import windows10Microphone from '../img/microphone-solid.svg';
 import windows10Notification from '../img/comment-alt-regular.svg';
 import windows10WifiOn from '../img/wifi-solid-on.svg';
-import windows10WifiOff from '../img/wifi-solid-off.svg';
+// import windows10WifiOff from '../img/wifi-solid-off.svg';
 import windows10Mute from '../img/volume-off-solid.svg';
 import windows10Cmd from '../img/console-white.svg';
 
@@ -18,6 +18,7 @@ import CommandPrompt from './Data/CommandPrompt';
 class WindowsBar extends Component {
   static propTypes = {
     onLoadCmd: PropTypes.func.isRequired,
+    cmdToggleStatus: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -41,13 +42,25 @@ class WindowsBar extends Component {
     }), 1000);
   }
 
+  componentDidUpdate(prevProps) {
+    const { cmdToggleStatus } = this.props;
+    if (prevProps.cmdToggleStatus && !cmdToggleStatus) {
+      console.log('workrs');
+      this.setState({
+        cmdStatus: cmdToggleStatus,
+      });
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   toggleCmdStatus() {
     const { cmdStatus } = this.state;
-    const { onLoadCmd } = this.props;
+    const {
+      onLoadCmd,
+    } = this.props;
     onLoadCmd();
     this.setState({
       cmdStatus: !cmdStatus,
@@ -57,9 +70,21 @@ class WindowsBar extends Component {
   toggleCmdDisplay() {
     const { cmdStatus } = this.state;
     if (cmdStatus) {
-      return <WindowsCmd src={windows10Cmd} onClick={() => this.toggleCmdStatus(this)} alt="cmd" />;
+      return (
+        <WindowsCmd
+          src={windows10Cmd}
+          onClick={() => this.toggleCmdStatus(this)}
+          alt="cmd"
+        />
+      );
     }
-    return <WindowsCmdEnabled src={windows10Cmd} onClick={() => this.toggleCmdStatus(this)} alt="cmd" />;
+    return (
+      <WindowsCmdEnabled
+        src={windows10Cmd}
+        onClick={() => this.toggleCmdStatus(this)}
+        alt="cmd"
+      />
+    );
   }
 
   render() {

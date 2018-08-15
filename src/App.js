@@ -39,12 +39,18 @@ export default class App extends Component {
     }
   }
 
-  startCmd() {
+  toggleCmd() {
     const { cmdOpened } = this.state;
     this.setState({
       cmdOpened: !cmdOpened,
     });
-  };
+  }
+
+  forceTurnOffCmd() {
+    this.setState({
+      cmdOpened: false,
+    });
+  }
 
   render() {
     const {
@@ -60,8 +66,11 @@ export default class App extends Component {
         { starCreator(5) }
         {loadingState === 'login'
         && cmdOpened
-        && <MainFrame /> }
-        <WindowsBar onLoadCmd={() => { this.startCmd(); }} />
+        && <MainFrame exitFunction={() => { this.forceTurnOffCmd(); }} /> }
+        <WindowsBar
+          onLoadCmd={() => { this.toggleCmd(); }}
+          cmdToggleStatus={cmdOpened}
+        />
       </Wrapper>
     );
   }
