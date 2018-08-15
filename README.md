@@ -1,25 +1,39 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+## Commands
+### Completed
+ - `cls`/`clear` (clears screen)
+ - `npm help` (list all commands)
+ - `npm start git`
+ - `npm start linkedin`
+ - `npm start resume`
 
-## Current commands
- - cls/clear (clears screen)
- - npm help (list all commands)
- - npm start git
- - npm start linkedin
- - npm start resume
-
-## WIP
- - npm show languages (show languages)
- - npm show tools (shows tools)
+### WIP
+ - `npm show languages` (show languages)
+ - `npm show tools` (shows tools)
  
-## Future commands:
- - exit/logout/logoff (closes 'program')
- - windows run logoff  (logs user off -> will show login screen)
- - windows run shutdown (simulates shutdown and potentially close tab)
- - **easter egg: sudo rm - rf ( simulates BSOD for jokes)
+### Future:
+ - `exit`/`logout`/`logoff` (closes 'program')
+ - `windows run logoff`  (logs user off -> will show login screen)
+ - `windows run shutdown` (simulates shutdown and potentially close tab)
+ - **easter egg: `sudo rm - rf` ( simulates BSOD for jokes)
+ 
+## Other UI Functionalities
+### Completed
 
+ 
+### WIP
+ - Closing/Minimizing cmd
+
+### Future
+ - full screen cmd
+ - toggle wifi to disable cmd
+ - potentially a login screen (?)
+ - drag cmd around dynamically
+ - clicking windows will give menu:
+   - shut down (?)
+   - log off (if login screen is implemented)
+ 
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
