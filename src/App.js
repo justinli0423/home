@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import MainFrame from './Components/MainFrame';
 import WindowsBar from './Components/WindowsBar';
 import WindowsBootup from './Components/WindowsBootup';
-import WindowsLogin from './Components/WindowsLogin';
+// import WindowsLogin from './Components/WindowsLogin';
 
 import Colors from './Components/Data/Colors';
 
@@ -48,12 +48,8 @@ export default class App extends Component {
         && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
         { starCreator(5) }
         {loadingState === 'login'
-        && (
-        <div>
-          <MainFrame />
-          <WindowsBar />
-        </div>
-        )}
+        && <MainFrame /> }
+        <WindowsBar />
       </Wrapper>
     );
   }

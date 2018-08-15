@@ -9,7 +9,7 @@ import CommandPrompt from './Data/CommandPrompt';
 
 import WindowsLogo from '../img/windows-startup.svg';
 
-const incrementSpeed = 10;
+const incrementSpeed = 1;
 
 export default class WindowsBootup extends Component {
   static propTypes = {

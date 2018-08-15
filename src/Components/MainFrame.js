@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faWindowMaximize, faRocket } from '@fortawesome/free-solid-svg-icons';
 
 import CommandLine from './CommandLine';
 import Colors from './Data/Colors';
 
+import Windows10Maximize from '../img/window-maximize.svg';
+import windows10CmdIcon from '../img/console-black.svg';
+
 const frameTitle = 'jli0423@WEBAPP: /mnt/c/Users/jli0423/git/jli0423.github.io';
 
-library.add(faWindowMaximize, faRocket);
 
 export default class MainFrame extends Component {
   componentWillMount() {
@@ -22,7 +21,7 @@ export default class MainFrame extends Component {
       <Wrapper>
         <WindowsNavBarLeft>
           <WindowsToolLeft>
-            <FontAwesomeIcon icon={faRocket} />
+            <WindowsIcon src={windows10CmdIcon} />
             <Title>
               { frameTitle }
             </Title>
@@ -33,7 +32,7 @@ export default class MainFrame extends Component {
             -
           </WindowsTool>
           <WindowsToolMaximize>
-            <FontAwesomeIcon icon={faWindowMaximize} />
+            <img src={Windows10Maximize} alt="max" />
           </WindowsToolMaximize>
           <WindowsToolClose>
             X
@@ -56,6 +55,12 @@ const Wrapper = styled.div`
   background-color: ${Colors.black};
   box-shadow: 1px 5px 3px ${Colors.black};
   border: .5px solid ${Colors.lightGrey2};
+`;
+
+const WindowsIcon = styled.img`
+  vertical-align: middle;
+  width: 1.5em;
+  height: 1em;
 `;
 
 const WindowsNavBar = styled.div`
