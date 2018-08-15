@@ -134,7 +134,8 @@ const Windows = styled.img`
   display: inline-block;
   padding: 1em 1.5em;
   width: 2em;
-  height: 2em;
+  height: calc(2em - 3px);
+  border-bottom: 3px solid ${Colors.transparent};
 `;
 
 const WindowsPullRight = Windows.extend`
@@ -152,7 +153,6 @@ const WindowsCmd = Windows.extend`
 const WindowsCmdEnabled = WindowsCmd.extend`
   background-color: ${Colors.translucentGrey};
   border-bottom: 3px solid ${Colors.windowsLightBlue};
-  height: calc(2em - 3px);
 `;
 
 const WindowsPullRightEnd = WindowsPullRight.extend`
