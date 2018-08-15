@@ -9,7 +9,7 @@ import CommandPrompt from './Data/CommandPrompt';
 
 import WindowsLogo from '../img/windows-startup.svg';
 
-const incrementSpeed = 15;
+const incrementSpeed = 10;
 
 export default class WindowsBootup extends Component {
   static propTypes = {
@@ -83,6 +83,7 @@ export default class WindowsBootup extends Component {
 const FadeScreen = keyframes`
   100% {
     opacity: 0;
+    background-color: ${Colors.transparent};
   }
 `;
 
@@ -99,7 +100,8 @@ const Wrapper = styled.div`
 `;
 
 const WrapperLoaded = Wrapper.extend`
-  animation: ${FadeScreen} 1s linear;
+  animation-fill-mode: forwards;
+  animation: ${FadeScreen} 1.5s linear;
 `;
 
 const LoadingPhrase = styled.div`
