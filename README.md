@@ -1,28 +1,25 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
 ## Commands
-### Current
- - cls/clear (clears screen)
- - npm help (list all commands)
- - npm start git
- - npm start linkedin
- - npm start resume
+### Completed
+ - `cls`/`clear` (clears screen)
+ - `npm help` (list all commands)
+ - `npm start git`
+ - `npm start linkedin`
+ - `npm start resume`
 
 ### WIP
- - npm show languages (show languages)
- - npm show tools (shows tools)
+ - `npm show languages` (show languages)
+ - `npm show tools` (shows tools)
  
 ### Future:
- - exit/logout/logoff (closes 'program')
- - windows run logoff  (logs user off -> will show login screen)
- - windows run shutdown (simulates shutdown and potentially close tab)
- - **easter egg: sudo rm - rf ( simulates BSOD for jokes)
+ - `exit`/`logout`/`logoff` (closes 'program')
+ - `windows run logoff`  (logs user off -> will show login screen)
+ - `windows run shutdown` (simulates shutdown and potentially close tab)
+ - **easter egg: `sudo rm - rf` ( simulates BSOD for jokes)
  
 ## Other UI Functionalities
-### Current
+### Completed
 
  
 ### WIP
