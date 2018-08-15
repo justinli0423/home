@@ -22,6 +22,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       loadingState: 'startup',
+      cmdOpened: false,
     };
   }
 
@@ -38,8 +39,18 @@ export default class App extends Component {
     }
   }
 
+  startCmd() {
+    const { cmdOpened } = this.state;
+    this.setState({
+      cmdOpened: !cmdOpened,
+    });
+  };
+
   render() {
-    const { loadingState } = this.state;
+    const {
+      loadingState,
+      cmdOpened,
+    } = this.state;
     return (
       <Wrapper>
         {loadingState === 'startup'
@@ -48,8 +59,9 @@ export default class App extends Component {
         && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
         { starCreator(5) }
         {loadingState === 'login'
+        && cmdOpened
         && <MainFrame /> }
-        <WindowsBar />
+        <WindowsBar onLoadCmd={() => { this.startCmd(); }} />
       </Wrapper>
     );
   }

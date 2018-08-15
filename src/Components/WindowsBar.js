@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import windows10Logo from '../img/windows-brands.svg';
 import windows10Cortana from '../img/circle-regular.svg';
@@ -8,12 +9,17 @@ import windows10Notification from '../img/comment-alt-regular.svg';
 import windows10WifiOn from '../img/wifi-solid-on.svg';
 import windows10WifiOff from '../img/wifi-solid-off.svg';
 import windows10Mute from '../img/volume-off-solid.svg';
+import windows10Cmd from '../img/console-white.svg';
 
 import Services from './Service/Services';
 import Colors from './Data/Colors';
 import CommandPrompt from './Data/CommandPrompt';
 
 class WindowsBar extends Component {
+  static propTypes = {
+    onLoadCmd: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,9 +47,19 @@ class WindowsBar extends Component {
 
   toggleCmdStatus() {
     const { cmdStatus } = this.state;
+    const { onLoadCmd } = this.props;
+    onLoadCmd();
     this.setState({
       cmdStatus: !cmdStatus,
     });
+  }
+
+  toggleCmdDisplay() {
+    const { cmdStatus } = this.state;
+    if (cmdStatus) {
+      return <WindowsCmd src={windows10Cmd} onClick={() => this.toggleCmdStatus(this)} alt="cmd" />;
+    }
+    return <WindowsCmdEnabled src={windows10Cmd} onClick={() => this.toggleCmdStatus(this)} alt="cmd" />;
   }
 
   render() {
@@ -63,6 +79,7 @@ class WindowsBar extends Component {
           </SearchLabel>
           <WindowsPullRight src={windows10Microphone} alt="mic" />
         </SearchBar>
+        { this.toggleCmdDisplay() }
         <WindowsPullRight src={windows10Notification} alt="comment" />
         <Dates>
           <Time>
@@ -76,7 +93,8 @@ class WindowsBar extends Component {
           { CommandPrompt.windowsNavbar[1] }
         </Language>
         <WindowsPullRight src={windows10Mute} />
-        <WindowsPullRightEnd onClick={() => this.toggleCmdStatus()} src={cmdStatus ? windows10WifiOn : windows10WifiOff} />
+        {/* future: toggle wifi will disable cmd */}
+        <WindowsPullRightEnd src={cmdStatus ? windows10WifiOn : windows10WifiOn} />
       </Wrapper>
     );
   }
@@ -122,6 +140,19 @@ const Windows = styled.img`
 const WindowsPullRight = Windows.extend`
   float: right;
   font-size: 1em;
+`;
+
+const WindowsCmd = Windows.extend`
+  font-size: 1em;
+  &:hover {
+    background-color: ${Colors.translucentGrey};
+  }
+`;
+
+const WindowsCmdEnabled = WindowsCmd.extend`
+  background-color: ${Colors.translucentGrey};
+  border-bottom: 3px solid ${Colors.windowsLightBlue};
+  height: calc(2em - 3px);
 `;
 
 const WindowsPullRightEnd = WindowsPullRight.extend`
