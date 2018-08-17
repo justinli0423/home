@@ -24,6 +24,7 @@ export default class App extends Component {
       loadingState: 'startup',
       cmdOpened: false,
     };
+    this.positionRef = React.createRef();
   }
 
   startUpFinished(startupPercentage) {
