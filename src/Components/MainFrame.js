@@ -47,6 +47,10 @@ export default class MainFrame extends Component {
     const {
       mouseDown,
       registerOldPosition,
+      currentMouseX,
+      currentMouseY,
+      offsetX,
+      offsetY,
     } = this.state;
     const cmdPosition = this.positionRef.getClientRects()[0];
     if (mouseDown && registerOldPosition) {
@@ -56,6 +60,14 @@ export default class MainFrame extends Component {
         offsetY: event.clientY - cmdPosition.top,
       });
     } else {
+      // unsure why first click does not change position while draggin
+      // will find a fix another time
+      if (mouseDown) {
+        this.setState({
+          relativeX: currentMouseX - offsetX || 0,
+          relativeY: currentMouseY - offsetY || 0,
+        });
+      }
       this.setState({
         currentMouseX: event.clientX,
         currentMouseY: event.clientY,
@@ -92,6 +104,7 @@ export default class MainFrame extends Component {
         relativeY: currentMouseY - offsetY || 0,
       });
     }
+
     return this.setState({
       mouseDown: false,
     });
