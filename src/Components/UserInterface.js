@@ -21,12 +21,7 @@ class UserInterface extends Component {
   componentWillMount() {
     this.setState({
       lineInputAmounts: 1,
-      inputHistory: [],
     });
-  }
-
-  componentDidMount() {
-    this.autoFocusRef.focus();
   }
 
   componentDidUpdate(prevProp, prevState) {
@@ -43,7 +38,6 @@ class UserInterface extends Component {
     e.preventDefault();
     const {
       lineInputAmounts,
-      inputHistory,
     } = this.state;
     const inputValue = this.autoFocusRef.value;
     const { commandTrigger } = this.props;
@@ -58,51 +52,39 @@ class UserInterface extends Component {
         commandTrigger('unknown');
       });
 
+    this.autoFocusRef.value = '';
     // this is always here to create next line
     // not sure why .finally() isn't working...
-    // Todo: input history and show it like real cmd
     this.setState({
       lineInputAmounts: lineInputAmounts + 1,
-      // inputHistory: inputHistory.push(inputValue),
     });
   }
 
-  inputCreator(num) {
-    const promptArray = [];
-    for (let i = 0; i < num; i += 1) {
-      promptArray.push(i);
-    }
-
-    return promptArray.map(() => (
-      <UserInputFields>
-        <UserInputLabelUser htmlFor="UserInput">
-          { CommandPrompt.initializeStatement[0] }
-        </UserInputLabelUser>
-        <UserInputLabelLocation htmlFor="UserInput">
-          { CommandPrompt.initializeStatement[1] }
-        </UserInputLabelLocation>
-        <UserInput
-          innerRef={(focus) => { this.autoFocusRef = focus; }}
-          type="text"
-          name="userInput"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
-          id="UserInput"
-        />
-        <UserSubmit
-          onClick={userInput => this.userCommandInput(userInput)}
-        />
-      </UserInputFields>
-    ));
-  }
-
   render() {
-    const { lineInputAmounts } = this.state;
     return (
       <Wrapper>
-        { this.inputCreator(lineInputAmounts) }
+        <UserInputFields>
+          <UserInputLabelUser htmlFor="UserInput">
+            { CommandPrompt.initializeStatement[0] }
+          </UserInputLabelUser>
+          <UserInputLabelLocation htmlFor="UserInput">
+            { CommandPrompt.initializeStatement[1] }
+          </UserInputLabelLocation>
+          <UserInput
+            innerRef={(focus) => { this.autoFocusRef = focus; }}
+            type="text"
+            name="userInput"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            id="UserInput"
+            autoFocus
+          />
+          <UserSubmit
+            onClick={userInput => this.userCommandInput(userInput)}
+          />
+        </UserInputFields>
       </Wrapper>
     );
   }
@@ -128,9 +110,7 @@ const UserInput = styled.input`
   background-color: ${Colors.transparent};
   border: none;
   color: ${Colors.white};
-  &::-ms-clear {
-    display: none;
-  }
+  clear: none;
 `;
 
 const UserSubmit = styled.button`

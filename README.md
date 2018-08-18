@@ -18,6 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - `windows run shutdown` (simulates shutdown and potentially close tab)
  - **easter egg: `sudo rm - rf` ( simulates BSOD for jokes)
  
+ ---
 ## Other UI Functionalities
 ### Completed
 
@@ -34,6 +35,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
    - shut down (?)
    - log off (if login screen is implemented)
  
+---
+Bugs:
+ - First drag not working for CMD
+ - cmd not display history
+
+---
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)

@@ -189,7 +189,6 @@ export default class CommandLine extends Component {
           {npmLanguages[0].map(asciiPart => (
             <pre>
               { asciiPart }
-              <br />
             </pre>
           ))
           }
@@ -210,7 +209,6 @@ export default class CommandLine extends Component {
           {npmTools[0].map(asciiPart => (
             <pre>
               { asciiPart }
-              <br />
             </pre>
           ))
           }
