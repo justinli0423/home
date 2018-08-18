@@ -40,6 +40,7 @@ export default class MainFrame extends Component {
       offsetY: 0,
       mouseDown: false,
       registerOldPosition: false,
+      fullScreen: false,
     });
   }
 
@@ -47,13 +48,14 @@ export default class MainFrame extends Component {
     const {
       mouseDown,
       registerOldPosition,
+      fullScreen,
       currentMouseX,
       currentMouseY,
       offsetX,
       offsetY,
     } = this.state;
     const cmdPosition = this.positionRef.getClientRects()[0];
-    if (mouseDown && registerOldPosition) {
+    if (mouseDown && registerOldPosition && !fullScreen) {
       this.setState({
         registerOldPosition: false,
         offsetX: event.clientX - cmdPosition.left,
@@ -62,7 +64,7 @@ export default class MainFrame extends Component {
     } else {
       // unsure why first click does not change position while draggin
       // will find a fix another time
-      if (mouseDown) {
+      if (mouseDown && !fullScreen) {
         this.setState({
           relativeX: currentMouseX - offsetX || 0,
           relativeY: currentMouseY - offsetY || 0,
@@ -79,12 +81,15 @@ export default class MainFrame extends Component {
     const positionObject = this.positionRef.getClientRects()[0];
     const prevX = positionObject.left;
     const prevY = positionObject.top;
-    this.setState({
-      mouseDown: true,
-      registerOldPosition: true,
-      offsetX: event.clientX - prevX,
-      offsetY: event.clientY - prevY,
-    });
+    const { fullScreen } = this.state;
+    if (!fullScreen) {
+      this.setState({
+        mouseDown: true,
+        registerOldPosition: true,
+        offsetX: event.clientX - prevX,
+        offsetY: event.clientY - prevY,
+      });
+    }
   }
 
   mouseUnclicked() {
@@ -110,6 +115,13 @@ export default class MainFrame extends Component {
     });
   }
 
+  toggleFullScreen() {
+    const { fullScreen } = this.state;
+    this.setState({
+      fullScreen: !fullScreen,
+    });
+  }
+
   closeCmd() {
     const { exitFunction } = this.props;
     exitFunction();
@@ -119,6 +131,7 @@ export default class MainFrame extends Component {
     const {
       relativeX,
       relativeY,
+      fullScreen,
       initialState,
     } = this.state;
 
@@ -131,6 +144,7 @@ export default class MainFrame extends Component {
           id="cmdWrapper"
           positionX={relativeX}
           positionY={relativeY}
+          fullScreenToggle={fullScreen}
           initialState={initialState}
           innerRef={(position) => { this.positionRef = position; }}
         >
@@ -144,14 +158,14 @@ export default class MainFrame extends Component {
               </Title>
             </WindowsToolLeft>
           </WindowsNavBarLeft>
-          <WindowsNavBarRight onMouseDown={position => this.mouseClicked(position)}>
+          <WindowsNavBarRight>
             <WindowsIconRightGrey
               onClick={() => { this.closeCmd(); }}
               src={Windows10Minimize}
             />
             <WindowsIconRightGreySquare
               src={Windows10Square}
-              alt="max"
+              onClick={() => { this.toggleFullScreen(); }}
             />
             <WindowsIconRightRed
               src={Windows10Exit}
@@ -181,30 +195,59 @@ const TransparentBackground = styled.div`
 const Wrapper = styled.div`
   position: absolute;
   display: block;
-  width: 65em;
-  height: 50em;
   background-color: ${Colors.black};
   box-shadow: 1px 5px 3px ${Colors.black};
   cursor: default;
   border: .5px solid ${Colors.lightGrey2};
   border-top: none;
+  width: ${(props) => {
+    const { fullScreenToggle } = props;
+    return fullScreenToggle ? '100%' : '65em';
+  }};
+  height: ${(props) => {
+    const { fullScreenToggle } = props;
+    return fullScreenToggle ? 'calc(100% - 4em)' : '50em';
+  }};
   top: ${(props) => {
     const {
       positionY,
       initialState,
+      fullScreenToggle,
     } = props;
-    return initialState ? '50%' : `calc(${positionY}px)`;
+    if (initialState && !fullScreenToggle) {
+      return '50%';
+    }
+    if (fullScreenToggle) {
+      return 0;
+    }
+    return `calc(${positionY}px)`;
   }};
   left: ${(props) => {
     const {
       positionX,
+      fullScreenToggle,
       initialState,
     } = props;
-    return initialState ? '50%' : `calc(${positionX}px)`;
+    if (initialState && !fullScreenToggle) {
+      return '50%';
+    }
+    if (fullScreenToggle) {
+      return 0;
+    }
+    return `calc(${positionX}px)`;
   }};
   transform: ${(props) => {
-    const { initialState } = props;
-    return initialState ? 'translate(-50%, -50%)' : 'translate(0, 0)';
+    const {
+      initialState,
+      fullScreenToggle,
+    } = props;
+    if (fullScreenToggle) {
+      return 'translate(0, 0)';
+    }
+    if (initialState) {
+      return 'translate(-50%, -50%)';
+    }
+    return 'translate(0, 0)';
   }};
 `;
 
@@ -215,7 +258,6 @@ const WindowsIcon = styled.img`
   -webkit-user-drag: none;
   -moz-user-drag: none;
   -ms-user-drag: none;
-  user-drag: none;
 `;
 
 const WindowsIconRightGrey = WindowsIcon.extend`
@@ -253,7 +295,7 @@ const WindowsNavBar = styled.div`
 const WindowsNavBarRight = WindowsNavBar.extend`
   justify-content: flex-end;
   background-color: ${Colors.transparent};
-  width: 25%;
+  width: auto;
   right: 0;
 `;
 
