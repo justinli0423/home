@@ -73,6 +73,22 @@ const Prompt = {
      '- Bootstrap',
     ],
   ],
+  npmProjects: [
+    [
+    '   _____           _           _            ',
+    '  |  __ \\         (_)         | |          ',
+    '  | |__) | __ ___  _  ___  ___| |_ ___      ',
+    '  |  ___/ "__/ _ \\| |/ _ \\/ __| __/ __|   ',
+    '  | |   | | | (_) | |  __/ (__| |_\\__ \\   ',
+    '  |_|   |_|  \\___/| |\\___|\\___|\\__|___/ ',
+    '                 _/ |                       ',
+    '                |__/                        ',
+    '=========================================   ',
+    '- PlayMoji: https://github.com/Jli0423/PlayMoji',
+    '- APIs for QHacks: https://github.com/Jli0423/Std-lib',
+    '- Old Website: https://github.com/Jli0423/Jli0423.github.io--v2',
+    ],
+  ],
   windowsNavbar: [
     `Do not type here to search`,
     `ENG`,

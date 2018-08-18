@@ -218,6 +218,26 @@ export default class CommandLine extends Component {
     );
   }
 
+  renderProjects() {
+    const {
+      npmProjects,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          {npmProjects[0].map(asciiPart => (
+            <pre>
+              { asciiPart }
+            </pre>
+          ))
+          }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
   renderComponent() {
     const {
       introCount,
@@ -229,32 +249,27 @@ export default class CommandLine extends Component {
     }
 
     if (introCount > 45) {
-      if (commandCalled === 'clear') {
-        return this.renderCleared();
-      }
-
-      if (commandCalled === 'help' || commandCalled === 'unknown') {
-        return this.renderHelp();
-      }
-
-      if (commandCalled === 'git') {
-        return this.renderGit();
-      }
-
-      if (commandCalled === 'linkedin') {
-        return this.renderLinkedin();
-      }
-
-      if (commandCalled === 'resume') {
-        return this.renderResume();
-      }
-
-      if (commandCalled === 'languages') {
-        return this.renderLanguages();
-      }
-
-      if (commandCalled === 'tools') {
-        return this.renderTools();
+      switch (commandCalled) {
+        case 'clear':
+          return this.renderCleared();
+        case 'help':
+          return this.renderHelp();
+        case 'unknown':
+          return this.renderHelp();
+        case 'git':
+          return this.renderGit();
+        case 'linkedin':
+          return this.renderLinkedin();
+        case 'resume':
+          return this.renderResume();
+        case 'languages':
+          return this.renderLanguages();
+        case 'tools':
+          return this.renderTools();
+        case 'projects':
+          return this.renderProjects();
+        default:
+          return this.renderIntroSecondary();
       }
     }
 

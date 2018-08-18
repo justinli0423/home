@@ -9,6 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - `npm start resume`
  - `npm show languages` (show languages)
  - `npm show tools` (shows tools)
+ - `npm show projects` (shows projects + links)
 
 ### WIP
  

@@ -141,7 +141,6 @@ export default class MainFrame extends Component {
         onMouseMove={position => this.getMousePosition(position)}
       >
         <Wrapper
-          id="cmdWrapper"
           positionX={relativeX}
           positionY={relativeY}
           fullScreenToggle={fullScreen}

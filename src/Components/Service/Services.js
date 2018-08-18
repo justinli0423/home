@@ -9,6 +9,7 @@ import moment from 'moment';
 // - npm start resume
 // - npm show languages (show languages)
 // - npm show tools (shows tools)
+// - npm show projects (shows projects)
 
 // WIP:
 
@@ -39,6 +40,9 @@ export default {
       }
       if (command === 'npm show tools') {
         return resolve('tools');
+      }
+      if (command === 'npm show projects') {
+        return resolve('projects');
       }
       return reject(new Error('invalid Command'));
     });
