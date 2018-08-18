@@ -9,7 +9,7 @@ import CommandPrompt from './Data/CommandPrompt';
 const welcome = CommandPrompt.welcomeStatement[0];
 const introduction = CommandPrompt.welcomeStatement[1];
 // lower the number = faster the speed
-const typingSpeed = 40;
+const typingSpeed = 1;
 
 export default class CommandLine extends Component {
   constructor(props) {
@@ -186,15 +186,33 @@ export default class CommandLine extends Component {
     return (
       <Wrapper>
         <HelperStatements>
-          {npmLanguages[0].map((asciiPart) => {
-            const languagesAscii = { __html: asciiPart };
-            return (
-              <span>
-                <span dangerouslySetInnerHTML={languagesAscii} />
-                <br />
-              </span>
-            );
-          })
+          {npmLanguages[0].map(asciiPart => (
+            <pre>
+              { asciiPart }
+              <br />
+            </pre>
+          ))
+          }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderTools() {
+    const {
+      npmTools,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          {npmTools[0].map(asciiPart => (
+            <pre>
+              { asciiPart }
+              <br />
+            </pre>
+          ))
           }
         </HelperStatements>
         { this.renderUserInterface() }

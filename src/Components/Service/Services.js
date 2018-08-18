@@ -7,10 +7,10 @@ import moment from 'moment';
 // - npm start git
 // - npm start linkedin
 // - npm start resume
-
-// WIP
 // - npm show languages (show languages)
 // - npm show tools (shows tools)
+
+// WIP:
 
 // future:
 // - exit/logout/logoff (closes 'program')

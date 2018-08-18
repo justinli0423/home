@@ -38,28 +38,32 @@ class UserInterface extends Component {
     }
   }
 
-  // override default onSubmit so page does not refresh
   userCommandInput(e) {
+    // override default onSubmit so page does not refresh
     e.preventDefault();
-    const { lineInputAmounts } = this.state;
+    const {
+      lineInputAmounts,
+      inputHistory,
+    } = this.state;
+    const inputValue = this.autoFocusRef.value;
     const { commandTrigger } = this.props;
-
-    Service.commandValidator(this.autoFocusRef.value)
+    Service.commandValidator(inputValue)
       .then((status) => {
         commandTrigger(status);
         this.setState({
           lineInputAmounts: 0,
         });
       })
-      .catch((error) => {
+      .catch(() => {
         commandTrigger('unknown');
-        console.log(error);
       });
 
     // this is always here to create next line
     // not sure why .finally() isn't working...
+    // Todo: input history and show it like real cmd
     this.setState({
       lineInputAmounts: lineInputAmounts + 1,
+      // inputHistory: inputHistory.push(inputValue),
     });
   }
 

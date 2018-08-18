@@ -7,10 +7,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - `npm start git`
  - `npm start linkedin`
  - `npm start resume`
-
-### WIP
  - `npm show languages` (show languages)
  - `npm show tools` (shows tools)
+
+### WIP
  
 ### Future:
  - `exit`/`logout`/`logoff` (closes 'program')
