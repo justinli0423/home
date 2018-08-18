@@ -9,7 +9,7 @@ import CommandPrompt from './Data/CommandPrompt';
 const welcome = CommandPrompt.welcomeStatement[0];
 const introduction = CommandPrompt.welcomeStatement[1];
 // lower the number = faster the speed
-const typingSpeed = 1;
+const typingSpeed = 30;
 
 export default class CommandLine extends Component {
   constructor(props) {
