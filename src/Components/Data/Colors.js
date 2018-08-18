@@ -14,6 +14,7 @@ const colors = {
   translucentWhite: 'rgba(255, 255, 255, .2)',
   translucentBlack: 'rgba(0, 0, 0, .65)',
   translucentGrey: 'rgba(220, 220, 220, .35)',
+  translucentGreyLight: 'rgba(220, 220, 220, .45)',
   windowsLightBlue: '#0078d7',
 };
 

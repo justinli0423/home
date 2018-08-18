@@ -177,6 +177,9 @@ const WindowsCmd = Windows.extend`
 const WindowsCmdEnabled = WindowsCmd.extend`
   background-color: ${Colors.translucentGrey};
   border-bottom: 3px solid ${Colors.windowsLightBlue};
+  &:hover {
+    background-color: ${Colors.translucentGreyLight};
+  }
 `;
 
 const WindowsPullRightEnd = WindowsPullRight.extend`
