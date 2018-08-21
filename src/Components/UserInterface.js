@@ -130,10 +130,6 @@ const UserInput = styled.textarea`
   max-height: 60%;
 `;
 
-const UserSubmit = styled.button`
-  display: none;
-`;
-
 const UserInputLabelLocation = styled.span`
   color: ${Colors.darkBlue};
 `;
