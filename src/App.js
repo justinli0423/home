@@ -5,6 +5,7 @@ import MainFrame from './Components/MainFrame';
 import WindowsBar from './Components/WindowsBar';
 import WindowsBootup from './Components/WindowsBootup';
 // import WindowsLogin from './Components/WindowsLogin';
+import Mobile from './Components/Mobile';
 
 import Colors from './Components/Data/Colors';
 
@@ -60,18 +61,23 @@ export default class App extends Component {
     } = this.state;
     return (
       <Wrapper>
-        {loadingState === 'startup'
-        && <WindowsBootup loadingStateFunc={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
-        {/* {loadingState === 'login'
-        && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
         { starCreator(5) }
-        {loadingState === 'login'
-        && cmdOpened
-        && <MainFrame exitFunction={() => { this.forceTurnOffCmd(); }} /> }
-        <WindowsBar
-          onLoadCmd={() => { this.toggleCmd(); }}
-          cmdToggleStatus={cmdOpened}
-        />
+        <WrapperDesktop>
+          {loadingState === 'startup'
+          && <WindowsBootup loadingStateFunc={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
+          {/* {loadingState === 'login'
+          && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
+          {loadingState === 'login'
+          && cmdOpened
+          && <MainFrame exitFunction={() => { this.forceTurnOffCmd(); }} /> }
+          <WindowsBar
+            onLoadCmd={() => { this.toggleCmd(); }}
+            cmdToggleStatus={cmdOpened}
+          />
+        </WrapperDesktop>
+        <WrapperMobile>
+          <Mobile />
+        </WrapperMobile>
       </Wrapper>
     );
   }
@@ -143,5 +149,17 @@ const ParallaxStar = styled.div`
   &:nth-child(5) {
     background-position: -20% 30%;
     animation-delay: 4s;
+  }
+`;
+
+const WrapperDesktop = Wrapper.extend`
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const WrapperMobile = Wrapper.extend`
+  @media (min-width: 1025px) {
+    display: none;
   }
 `;
