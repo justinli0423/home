@@ -34,7 +34,7 @@ class UserInterface extends Component {
     }
   }
 
-  userCommandInput(e) {
+  userCommandInput() {
     const {
       lineInputAmounts,
     } = this.state;
@@ -62,7 +62,7 @@ class UserInterface extends Component {
   submitTextArea(e) {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      this.userCommandInput(this.submitRef);
+      this.userCommandInput();
     }
   }
 
