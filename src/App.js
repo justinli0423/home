@@ -159,6 +159,7 @@ const WrapperDesktop = Wrapper.extend`
 `;
 
 const WrapperMobile = Wrapper.extend`
+  overflow: hidden;
   @media (min-width: 1025px) {
     display: none;
   }
