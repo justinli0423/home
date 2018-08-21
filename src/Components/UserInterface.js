@@ -15,6 +15,7 @@ class UserInterface extends Component {
     super(props);
     // creating reference to input
     this.autoFocusRef = React.createRef();
+    this.submitRef = React.createRef();
   }
 
   // future: keep input history until clear/cls to be more terminal-like
@@ -34,8 +35,6 @@ class UserInterface extends Component {
   }
 
   userCommandInput(e) {
-    // override default onSubmit so page does not refresh
-    e.preventDefault();
     const {
       lineInputAmounts,
     } = this.state;
@@ -60,9 +59,23 @@ class UserInterface extends Component {
     });
   }
 
+  submitTextArea(e) {
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      this.userCommandInput(this.submitRef);
+    }
+  }
+
+  autoAddHeight() {
+    // this.ref does not have the scrollHeight property
+    // so will use getElementById until I find something else
+    const ref = document.getElementById('UserInput');
+    ref.style.height = `${ref.scrollHeight}px`;
+  }
+
   render() {
     return (
-      <Wrapper>
+      <Wrapper onMouseMove={() => { this.autoFocusRef.focus(); }}>
         <UserInputFields>
           <UserInputLabelUser htmlFor="UserInput">
             { CommandPrompt.initializeStatement[0] }
@@ -72,6 +85,8 @@ class UserInterface extends Component {
           </UserInputLabelLocation>
           <UserInput
             innerRef={(focus) => { this.autoFocusRef = focus; }}
+            onKeyUp={() => { this.autoAddHeight(); }}
+            onKeyDown={(key) => { this.submitTextArea(key); }}
             type="text"
             name="userInput"
             autocomplete="off"
@@ -81,9 +96,7 @@ class UserInterface extends Component {
             id="UserInput"
             autoFocus
           />
-          <UserSubmit
-            onClick={userInput => this.userCommandInput(userInput)}
-          />
+          {/* no submit here necessary; just map on key down for textarea */}
         </UserInputFields>
       </Wrapper>
     );
@@ -103,14 +116,18 @@ const UserInputFields = styled.form`
   font-size: 1.2em;
 `;
 
-const UserInput = styled.input`
+const UserInput = styled.textarea`
   outline: none;
   width: calc(100% - 24.5em);
   text-overflow: 1;
   background-color: ${Colors.transparent};
+  overflow:hidden;
+  vertical-align: top;
   border: none;
   color: ${Colors.white};
-  clear: none;
+  resize: none;
+  min-height: 5em;
+  max-height: 60%;
 `;
 
 const UserSubmit = styled.button`
