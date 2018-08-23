@@ -40,6 +40,7 @@ class UserInterface extends Component {
     } = this.state;
     const inputValue = this.autoFocusRef.value;
     const { commandTrigger } = this.props;
+    this.autoFocusRef.value = '';
     Service.commandValidator(inputValue)
       .then((status) => {
         commandTrigger(status);
@@ -51,7 +52,6 @@ class UserInterface extends Component {
         commandTrigger('unknown');
       });
 
-    this.autoFocusRef.value = '';
     // this is always here to create next line
     // not sure why .finally() isn't working...
     this.setState({

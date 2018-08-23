@@ -19,7 +19,7 @@ export default class CommandLine extends Component {
       introCount: 1,
       welcomeStatement: '',
       introStatement: '',
-      commandCalled: null,
+      commandCalled: [],
     });
   }
 
@@ -50,9 +50,17 @@ export default class CommandLine extends Component {
   }
 
   commandCheck(command) {
+    const { commandCalled } = this.state;
+    commandCalled.push(command);
     this.setState({
-      commandCalled: command,
+      commandCalled,
     });
+
+    if (command === 'clear') {
+      this.setState({
+        commandCalled: [],
+      });
+    }
   }
 
   renderUserInterface() {
@@ -118,6 +126,21 @@ export default class CommandLine extends Component {
               <br />
             </span>
           )) }
+        </HelperStatements>
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
+  }
+
+  renderUnknown() {
+    const {
+      incorrectInput,
+    } = CommandPrompt;
+
+    return (
+      <Wrapper>
+        <HelperStatements>
+          { incorrectInput }
         </HelperStatements>
         { this.renderUserInterface() }
       </Wrapper>
@@ -248,29 +271,33 @@ export default class CommandLine extends Component {
       return this.renderIntro();
     }
 
+    // returning multiple segments? not working as of now
     if (introCount > 45) {
-      switch (commandCalled) {
-        case 'clear':
-          return this.renderCleared();
-        case 'help':
-          return this.renderHelp();
-        case 'unknown':
-          return this.renderHelp();
-        case 'git':
-          return this.renderGit();
-        case 'linkedin':
-          return this.renderLinkedin();
-        case 'resume':
-          return this.renderResume();
-        case 'languages':
-          return this.renderLanguages();
-        case 'tools':
-          return this.renderTools();
-        case 'projects':
-          return this.renderProjects();
-        default:
-          return this.renderIntroSecondary();
-      }
+      commandCalled.map((command) => {
+        console.log(command);
+        switch (command) {
+          case 'clear':
+            return this.renderCleared();
+          case 'help':
+            return this.renderHelp();
+          case 'unknown':
+            return this.renderUnknown();
+          case 'git':
+            return this.renderGit();
+          case 'linkedin':
+            return this.renderLinkedin();
+          case 'resume':
+            return this.renderResume();
+          case 'languages':
+            return this.renderLanguages();
+          case 'tools':
+            return this.renderTools();
+          case 'projects':
+            return this.renderProjects();
+          default:
+            return this.renderIntroSecondary();
+        }
+      });
     }
 
     return this.renderIntroSecondary();
