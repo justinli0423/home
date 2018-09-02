@@ -43,13 +43,19 @@ class UserInterface extends Component {
     this.autoFocusRef.value = '';
     Service.commandValidator(inputValue)
       .then((status) => {
-        commandTrigger(status);
+        commandTrigger({
+          status,
+          inputValue,
+        });
         this.setState({
           lineInputAmounts: 0,
         });
       })
       .catch(() => {
-        commandTrigger('unknown');
+        commandTrigger({
+          status: 'unknown',
+          inputValue,
+        });
       });
 
     // this is always here to create next line
@@ -104,6 +110,7 @@ class UserInterface extends Component {
 }
 
 const Wrapper = styled.div`
+  /* margin-top: 2.5em; */
   display: block;
   width: 100%;
 `;

@@ -2,6 +2,7 @@
 
 // empty space
 const _ = '\u00a0\u00a0';
+const tab = '\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0';
 
 const Prompt = {
   startUp: `Getting devices ready${_}`,
@@ -15,7 +16,7 @@ const Prompt = {
   ],
   npmHelp: [
     `Usage: [npm, windows] <command>`,
-    `${_} ${_}npm: where <command> is one of:`,
+    `${_} ${_} ${_} ${_} npm: where <command> is one of:`,
     `${_} ${_} ${_} ${_} help ${_} ${_} quick help guide`,
     `${_} ${_} ${_} ${_} start ${_} ${_} <git, linkedin, resume> ${_} ${_} starts <command>`,
     `${_} ${_} ${_} ${_} show ${_} ${_} <languages, tools, languages> ${_} ${_} shows <command>`,

@@ -20,6 +20,7 @@ export default class CommandLine extends Component {
       welcomeStatement: '',
       introStatement: '',
       commandCalled: [],
+      inputHistory: [],
       userStarted: false,
     });
   }
@@ -51,20 +52,44 @@ export default class CommandLine extends Component {
   }
 
   commandCheck(command) {
-    let { commandCalled } = this.state;
-    if (command === 'clear') {
+    let {
+      commandCalled,
+      inputHistory,
+    } = this.state;
+    console.log(command);
+    if (command.status === 'clear') {
       commandCalled = [];
+      inputHistory = [];
     }
 
-    commandCalled.push(command);
+    commandCalled.push(command.status);
+    inputHistory.push(command.inputValue);
     this.setState({
       commandCalled,
+      inputHistory,
       userStarted: true,
     });
   }
 
   renderUserInterface() {
     return <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />;
+  }
+
+  renderFakeUserInput(key) {
+    const { inputHistory } = this.state;
+    return (
+      <span>
+        <WrapperFakeUserInputUser>
+          { CommandPrompt.initializeStatement[0] }
+        </WrapperFakeUserInputUser>
+        <WrapperFakeUserInputLocation>
+          { CommandPrompt.initializeStatement[1] }
+        </WrapperFakeUserInputLocation>
+        <Input>
+          { inputHistory[key] }
+        </Input>
+      </span>
+    );
   }
 
   renderIntro() {
@@ -104,13 +129,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderHelp() {
+  renderHelp(key) {
     const {
       npmHelp,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         { npmHelp.map(statement => (
           <span>
             { statement }
@@ -121,25 +148,29 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderUnknown() {
+  renderUnknown(key) {
     const {
       incorrectInput,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         { incorrectInput }
       </HelperStatements>
     );
   }
 
-  renderGit() {
+  renderGit(key) {
     const {
       npmGit,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         { npmGit[0] }
         <NpmLink target="_blank" href={npmGit[1]}>
           { npmGit[1] }
@@ -148,13 +179,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderLinkedin() {
+  renderLinkedin(key) {
     const {
       npmLinkedIn,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         { npmLinkedIn[0] }
         <NpmLink target="_blank" href={npmLinkedIn[1]}>
           { npmLinkedIn[1] }
@@ -163,13 +196,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderResume() {
+  renderResume(key) {
     const {
       npmResume,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         { npmResume[0] }
         <NpmLink target="_blank" href={npmResume[1]}>
           { npmResume[1] }
@@ -178,13 +213,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderLanguages() {
+  renderLanguages(key) {
     const {
       npmLanguages,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         {npmLanguages[0].map(asciiPart => (
           <pre>
             { asciiPart }
@@ -195,13 +232,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderTools() {
+  renderTools(key) {
     const {
       npmTools,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         {npmTools[0].map(asciiPart => (
           <pre>
             { asciiPart }
@@ -212,13 +251,15 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderProjects() {
+  renderProjects(key) {
     const {
       npmProjects,
     } = CommandPrompt;
 
     return (
       <HelperStatements>
+        { this.renderFakeUserInput(key) }
+        <br />
         {npmProjects[0].map(asciiPart => (
           <pre>
             { asciiPart }
@@ -229,28 +270,28 @@ export default class CommandLine extends Component {
     );
   }
 
-  renderConditionals(command) {
+  renderConditionals(command, index) {
     switch (command) {
       case 'clear':
         return this.renderCleared();
       case 'help':
-        return this.renderHelp();
+        return this.renderHelp(index);
       case 'unknown':
-        return this.renderUnknown();
+        return this.renderUnknown(index);
       case 'git':
-        return this.renderGit();
+        return this.renderGit(index);
       case 'linkedin':
-        return this.renderLinkedin();
+        return this.renderLinkedin(index);
       case 'resume':
-        return this.renderResume();
+        return this.renderResume(index);
       case 'languages':
-        return this.renderLanguages();
+        return this.renderLanguages(index);
       case 'tools':
-        return this.renderTools();
+        return this.renderTools(index);
       case 'projects':
-        return this.renderProjects();
+        return this.renderProjects(index);
       default:
-        return this.renderIntroSecondary();
+        return this.renderIntroSecondary(index);
     }
   }
 
@@ -268,7 +309,7 @@ export default class CommandLine extends Component {
     return (
       <Wrapper>
         { !userStarted && commandCalled.length === 0 && this.renderIntroSecondary() }
-        { commandCalled.map(command => this.renderConditionals(command)) }
+        { commandCalled.map((command, index) => this.renderConditionals(command, index)) }
         { this.renderUserInterface() }
       </Wrapper>
     );
@@ -287,7 +328,7 @@ const Wrapper = styled.div`
 `;
 
 const HelperStatements = styled.div`
-  display: block;
+  display: inline-block;
   margin-top: 2.5em;
   font-size: 1.2em;
   color: ${Colors.white};
@@ -299,4 +340,20 @@ const NpmLink = styled.a`
   &:hover {
     color: ${Colors.lightGrey2};
   }
+`;
+
+const WrapperFakeUserInputUser = HelperStatements.extend`
+  font-size: 1em;
+  margin-top: 0;
+  margin-right: 5px;
+  color: ${Colors.green};
+`;
+
+const WrapperFakeUserInputLocation = WrapperFakeUserInputUser.extend`
+  color: ${Colors.darkBlue};
+`;
+
+const Input = styled.span`
+  background-color: ${Colors.transparent};
+  color: ${Colors.white};
 `;
