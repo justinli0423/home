@@ -316,7 +316,11 @@ export default class CommandLine extends Component {
   }
 
   render() {
-    return this.renderComponent();
+    return (
+      <TopMargin>
+        { this.renderComponent() }
+      </TopMargin>
+    );
   }
 }
 
@@ -329,7 +333,6 @@ const Wrapper = styled.div`
 
 const HelperStatements = styled.div`
   display: inline-block;
-  margin-top: 2.5em;
   font-size: 1.2em;
   color: ${Colors.white};
   background-color: ${Colors.transparent};
@@ -356,4 +359,8 @@ const WrapperFakeUserInputLocation = WrapperFakeUserInputUser.extend`
 const Input = styled.span`
   background-color: ${Colors.transparent};
   color: ${Colors.white};
+`;
+
+const TopMargin = styled.div`
+  margin-top: 2.5em;
 `;
