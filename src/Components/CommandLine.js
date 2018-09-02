@@ -56,7 +56,6 @@ export default class CommandLine extends Component {
       commandCalled,
       inputHistory,
     } = this.state;
-    console.log(command);
     if (command.status === 'clear') {
       commandCalled = [];
       inputHistory = [];
@@ -99,11 +98,11 @@ export default class CommandLine extends Component {
     } = this.state;
 
     return (
-      <HelperStatements>
+      <IntroStatementMarginLeft>
         { welcomeStatement }
         <br />
         { introStatement }
-      </HelperStatements>
+      </IntroStatementMarginLeft>
     );
   }
 
@@ -119,13 +118,6 @@ export default class CommandLine extends Component {
         <br />
         { introStatement }
       </HelperStatements>
-    );
-  }
-
-  // returns empty element for padding/margin purposes
-  renderCleared() {
-    return (
-      <HelperStatements />
     );
   }
 
@@ -273,7 +265,7 @@ export default class CommandLine extends Component {
   renderConditionals(command, index) {
     switch (command) {
       case 'clear':
-        return this.renderCleared();
+        return null;
       case 'help':
         return this.renderHelp(index);
       case 'unknown':
@@ -332,10 +324,13 @@ const Wrapper = styled.div`
 `;
 
 const HelperStatements = styled.div`
-  display: inline-block;
   font-size: 1.2em;
   color: ${Colors.white};
   background-color: ${Colors.transparent};
+`;
+
+const IntroStatementMarginLeft = HelperStatements.extend`
+  margin-left: 5px;
 `;
 
 const NpmLink = styled.a`
@@ -346,6 +341,7 @@ const NpmLink = styled.a`
 `;
 
 const WrapperFakeUserInputUser = HelperStatements.extend`
+  display: inline-block;
   font-size: 1em;
   margin-top: 0;
   margin-right: 5px;

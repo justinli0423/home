@@ -19,7 +19,7 @@ const Prompt = {
     `${_} ${_} ${_} ${_} npm: where <command> is one of:`,
     `${_} ${_} ${_} ${_} help ${_} ${_} quick help guide`,
     `${_} ${_} ${_} ${_} start ${_} ${_} <git, linkedin, resume> ${_} ${_} starts <command>`,
-    `${_} ${_} ${_} ${_} show ${_} ${_} <languages, tools, languages> ${_} ${_} shows <command>`,
+    `${_} ${_} ${_} ${_} show ${_} ${_} <languages, tools> ${_} ${_} shows <command>`,
     // `${_} ${_} windows: where <command> is one of:`,
     // `${_} ${_} ${_} ${_} run <logoff, shutdown> ${_} ${_} runs the <command> on machine`,
   ],

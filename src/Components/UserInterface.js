@@ -110,8 +110,8 @@ class UserInterface extends Component {
 }
 
 const Wrapper = styled.div`
-  /* margin-top: 2.5em; */
   display: block;
+  overflow: hidden;
   width: 100%;
 `;
 
@@ -126,6 +126,7 @@ const UserInputFields = styled.form`
 const UserInput = styled.textarea`
   outline: none;
   width: calc(100% - 24.5em);
+  font-size: 1.2em;
   text-overflow: 1;
   background-color: ${Colors.transparent};
   overflow:hidden;

@@ -62,7 +62,7 @@ export default class MainFrame extends Component {
         offsetY: event.clientY - cmdPosition.top,
       });
     } else {
-      // unsure why first click does not change position while draggin
+      // unsure why first click does not change position while dragging
       // will find a fix another time
       if (mouseDown && !fullScreen) {
         this.setState({

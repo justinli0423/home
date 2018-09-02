@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
 ## Commands
 ### Completed
  - `cls`/`clear` (clears screen)
@@ -10,37 +8,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - `npm show languages` (show languages)
  - `npm show tools` (shows tools)
  - `npm show projects` (shows projects + links)
-
-### WIP
- 
-### Future:
- - `exit`/`logout`/`logoff` (closes 'program')
- - `windows run logoff`  (logs user off -> will show login screen)
- - `windows run shutdown` (simulates shutdown and potentially close tab)
- - **easter egg: `sudo rm - rf` ( simulates BSOD for jokes)
  
  ---
 ## Other UI Functionalities
 ### Completed
-
- 
-### WIP
- - Closing/Minimizing cmd
+ - closing/Minimizing cmd
+ - full screen cmd
+ - drag cmd around dynamically
+ - cmd not display history (fixed)
 
 ### Future
- - full screen cmd
  - toggle wifi to disable cmd
  - potentially a login screen (?)
- - drag cmd around dynamically
  - clicking windows will give menu:
    - shut down (?)
    - log off (if login screen is implemented)
  
 ---
 Bugs:
- - First drag not working for CMD
- - cmd not display history
-
+ - first drag not working for CMD
+ - overflowing commands not fixed 
+  - potentially just remove the oldest commands to give space
+  - auto `cls` (?)
 ---
 
 ## Table of Contents
