@@ -20,6 +20,7 @@ export default class CommandLine extends Component {
       welcomeStatement: '',
       introStatement: '',
       commandCalled: [],
+      userStarted: false,
     });
   }
 
@@ -50,23 +51,20 @@ export default class CommandLine extends Component {
   }
 
   commandCheck(command) {
-    const { commandCalled } = this.state;
+    let { commandCalled } = this.state;
+    if (command === 'clear') {
+      commandCalled = [];
+    }
+
     commandCalled.push(command);
     this.setState({
       commandCalled,
+      userStarted: true,
     });
-
-    if (command === 'clear') {
-      this.setState({
-        commandCalled: [],
-      });
-    }
   }
 
   renderUserInterface() {
-    return (
-      <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />
-    );
+    return <UserInterface commandTrigger={(command) => { this.commandCheck(command); }} />;
   }
 
   renderIntro() {
@@ -76,13 +74,11 @@ export default class CommandLine extends Component {
     } = this.state;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { welcomeStatement }
-          <br />
-          { introStatement }
-        </HelperStatements>
-      </Wrapper>
+      <HelperStatements>
+        { welcomeStatement }
+        <br />
+        { introStatement }
+      </HelperStatements>
     );
   }
 
@@ -93,22 +89,18 @@ export default class CommandLine extends Component {
     } = this.state;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { welcomeStatement }
-          <br />
-          { introStatement }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { welcomeStatement }
+        <br />
+        { introStatement }
+      </HelperStatements>
     );
   }
 
+  // returns empty element for padding/margin purposes
   renderCleared() {
     return (
-      <WrapperUserInterface>
-        { this.renderUserInterface() }
-      </WrapperUserInterface>
+      <HelperStatements />
     );
   }
 
@@ -118,17 +110,14 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { npmHelp.map(statement => (
-            <span>
-              { statement }
-              <br />
-            </span>
-          )) }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { npmHelp.map(statement => (
+          <span>
+            { statement }
+            <br />
+          </span>
+        )) }
+      </HelperStatements>
     );
   }
 
@@ -138,12 +127,9 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { incorrectInput }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { incorrectInput }
+      </HelperStatements>
     );
   }
 
@@ -153,15 +139,12 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { npmGit[0] }
-          <NpmLink target="_blank" href={npmGit[1]}>
-            { npmGit[1] }
-          </NpmLink>
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { npmGit[0] }
+        <NpmLink target="_blank" href={npmGit[1]}>
+          { npmGit[1] }
+        </NpmLink>
+      </HelperStatements>
     );
   }
 
@@ -171,15 +154,12 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { npmLinkedIn[0] }
-          <NpmLink target="_blank" href={npmLinkedIn[1]}>
-            { npmLinkedIn[1] }
-          </NpmLink>
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { npmLinkedIn[0] }
+        <NpmLink target="_blank" href={npmLinkedIn[1]}>
+          { npmLinkedIn[1] }
+        </NpmLink>
+      </HelperStatements>
     );
   }
 
@@ -189,15 +169,12 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          { npmResume[0] }
-          <NpmLink target="_blank" href={npmResume[1]}>
-            { npmResume[1] }
-          </NpmLink>
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        { npmResume[0] }
+        <NpmLink target="_blank" href={npmResume[1]}>
+          { npmResume[1] }
+        </NpmLink>
+      </HelperStatements>
     );
   }
 
@@ -207,17 +184,14 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          {npmLanguages[0].map(asciiPart => (
-            <pre>
-              { asciiPart }
-            </pre>
-          ))
-          }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        {npmLanguages[0].map(asciiPart => (
+          <pre>
+            { asciiPart }
+          </pre>
+        ))
+        }
+      </HelperStatements>
     );
   }
 
@@ -227,17 +201,14 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          {npmTools[0].map(asciiPart => (
-            <pre>
-              { asciiPart }
-            </pre>
-          ))
-          }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        {npmTools[0].map(asciiPart => (
+          <pre>
+            { asciiPart }
+          </pre>
+        ))
+        }
+      </HelperStatements>
     );
   }
 
@@ -247,60 +218,60 @@ export default class CommandLine extends Component {
     } = CommandPrompt;
 
     return (
-      <Wrapper>
-        <HelperStatements>
-          {npmProjects[0].map(asciiPart => (
-            <pre>
-              { asciiPart }
-            </pre>
-          ))
-          }
-        </HelperStatements>
-        { this.renderUserInterface() }
-      </Wrapper>
+      <HelperStatements>
+        {npmProjects[0].map(asciiPart => (
+          <pre>
+            { asciiPart }
+          </pre>
+        ))
+        }
+      </HelperStatements>
     );
+  }
+
+  renderConditionals(command) {
+    switch (command) {
+      case 'clear':
+        return this.renderCleared();
+      case 'help':
+        return this.renderHelp();
+      case 'unknown':
+        return this.renderUnknown();
+      case 'git':
+        return this.renderGit();
+      case 'linkedin':
+        return this.renderLinkedin();
+      case 'resume':
+        return this.renderResume();
+      case 'languages':
+        return this.renderLanguages();
+      case 'tools':
+        return this.renderTools();
+      case 'projects':
+        return this.renderProjects();
+      default:
+        return this.renderIntroSecondary();
+    }
   }
 
   renderComponent() {
     const {
       introCount,
       commandCalled,
+      userStarted,
     } = this.state;
 
     if (introCount < 45) {
       return this.renderIntro();
     }
 
-    // returning multiple segments? not working as of now
-    if (introCount > 45) {
-      commandCalled.map((command) => {
-        console.log(command);
-        switch (command) {
-          case 'clear':
-            return this.renderCleared();
-          case 'help':
-            return this.renderHelp();
-          case 'unknown':
-            return this.renderUnknown();
-          case 'git':
-            return this.renderGit();
-          case 'linkedin':
-            return this.renderLinkedin();
-          case 'resume':
-            return this.renderResume();
-          case 'languages':
-            return this.renderLanguages();
-          case 'tools':
-            return this.renderTools();
-          case 'projects':
-            return this.renderProjects();
-          default:
-            return this.renderIntroSecondary();
-        }
-      });
-    }
-
-    return this.renderIntroSecondary();
+    return (
+      <Wrapper>
+        { !userStarted && commandCalled.length === 0 && this.renderIntroSecondary() }
+        { commandCalled.map(command => this.renderConditionals(command)) }
+        { this.renderUserInterface() }
+      </Wrapper>
+    );
   }
 
   render() {
@@ -313,10 +284,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding-left: 5px;
-`;
-
-const WrapperUserInterface = Wrapper.extend`
-  margin-top: 2.5em;
 `;
 
 const HelperStatements = styled.div`
