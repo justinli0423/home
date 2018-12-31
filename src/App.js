@@ -1,80 +1,27 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import MainFrame from './Components/MainFrame';
-import WindowsBar from './Components/WindowsBar';
-import WindowsBootup from './Components/WindowsBootup';
-// import WindowsLogin from './Components/WindowsLogin';
 import Mobile from './Components/Mobile';
-
 import Colors from './Components/Data/Colors';
 
-function starCreator(num) {
-  const starArray = [];
-  for (let i = 0; i < num; i += 1) {
-    starArray.push(i);
+function starGenerator(amount, blur) {
+  let stars = '';
+  for(let i = 0; i < amount; i++) {
+    let polarity = -1;
+    polarity = Math.pow(polarity, i);
+    console.log(polarity);
+    stars += `${Math.floor(Math.random()*2000)}px ${Math.floor(Math.random()*2000)*polarity}px ${blur}px ${Colors.white}, `;
   }
-
-  return starArray.map(() => <ParallaxStar />);
+  return stars.slice(0, stars.length - 2);
 }
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loadingState: 'startup',
-      cmdOpened: false,
-    };
-    this.positionRef = React.createRef();
-  }
-
-  startUpFinished(startupPercentage) {
-    if (startupPercentage === 150) {
-      this.setState({
-        loadingState: 'login',
-      });
-    }
-    if (startupPercentage === true) {
-      this.setState({
-        loadingState: 'mainScreen',
-      });
-    }
-  }
-
-  toggleCmd() {
-    const { cmdOpened } = this.state;
-    this.setState({
-      cmdOpened: !cmdOpened,
-    });
-  }
-
-  forceTurnOffCmd() {
-    this.setState({
-      cmdOpened: false,
-    });
-  }
-
   render() {
-    const {
-      loadingState,
-      cmdOpened,
-    } = this.state;
     return (
       <Wrapper>
-        { starCreator(5) }
-        <WrapperDesktop>
-          {loadingState === 'startup'
-          && <WindowsBootup loadingStateFunc={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
-          {/* {loadingState === 'login'
-          && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
-          {loadingState === 'login'
-          && cmdOpened
-          && <MainFrame exitFunction={() => { this.forceTurnOffCmd(); }} /> }
-          <WindowsBar
-            onLoadCmd={() => { this.toggleCmd(); }}
-            cmdToggleStatus={cmdOpened}
-          />
-        </WrapperDesktop>
+        <ParallaxStarSmall />
+        <ParallaxStarMedium />
+        <ParallaxStarLarge />
         <WrapperMobile>
           <Mobile />
         </WrapperMobile>
@@ -83,20 +30,13 @@ export default class App extends Component {
   }
 }
 
-const parallaxStarsZoom = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-    animation-timing-function: ease-in;
-  } 
-  85% {
-    opacity: 1;
-    transform: scale(2.5);
-    animation-timing-function: linear;
+const shootingStars = keyframes`
+  from {
+    transform: translate(0px);
   }
-  100% {
-    opacity: 0;
-    transform: scale(3);
+  
+  to {
+    transform: translate(-1000px, 1000px);
   }
 `;
 
@@ -104,58 +44,37 @@ const Wrapper = styled.div`
   display: block;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(ellipse at bottom, ${Colors.spaceBlue} 0%, ${Colors.spaceBlack} 100%);
+  background: linear-gradient(143deg, #000e3b 1%, #210779 48%, #903897 94%), linear-gradient(#1e2652,#1e2652);
 `;
 
 const ParallaxStar = styled.div`
-  overflow: hidden;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-image: 
-    radial-gradient(1px 1px at 2em 3em, ${Colors.lightGrey}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 4em 7em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 5em 16em, ${Colors.lightGrey2}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 9em 4em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 13em 8em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 16em 12em, ${Colors.lightGrey2}, ${Colors.transparent});
-  background-repeat: repeat;
-  background-size: 20em 20em;
-  animation: ${parallaxStarsZoom} 9s infinite;
-  opacity: 0;
-
-  &:nth-child(1) {
-  background-position: 50% 50%;
-  animation-delay: 0s;
-  }
-
-  &:nth-child(2) {
-    background-position: 20% 60%;
-    animation-delay: 1s;
-  }
-
-  &:nth-child(3) {
-    background-position: -20% -30%;
-    animation-delay: 2s;
-  }
-
-  &:nth-child(4) {
-    background-position: 40% -80%;
-    animation-delay: 3s;
-  }
-
-  &:nth-child(5) {
-    background-position: -20% 30%;
-    animation-delay: 4s;
-  }
+  z-index: 1000;
+  top: 0%;
+  left: 0%;
+  color: transparent;
 `;
 
-const WrapperDesktop = Wrapper.extend`
-  @media (max-width: 1024px) {
-    display: none;
-  }
+const ParallaxStarSmall = ParallaxStar.extend`
+  width: 1px;
+  height: 1px;
+  box-shadow: ${starGenerator(3000, 0)};
+  animation: ${shootingStars} 80s linear infinite;
+`;
+
+const ParallaxStarMedium = ParallaxStar.extend`
+  width: 3px;
+  height: 3px;
+  box-shadow: ${starGenerator(500, 1)};
+  animation: ${shootingStars} 50s linear infinite;
+`;
+
+const ParallaxStarLarge = ParallaxStar.extend`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  box-shadow: ${starGenerator(100, 0)};
+  animation: ${shootingStars} 25s linear infinite;
 `;
 
 const WrapperMobile = Wrapper.extend`
