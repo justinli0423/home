@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
+/* eslint-disable no-plusplus */
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import Name from './Components/Name';
 import Mobile from './Components/Mobile';
 import Colors from './Components/Data/Colors';
 
 function starGenerator(amount, blur) {
   let stars = '';
-  for(let i = 0; i < amount; i++) {
+  for (let i = 0; i < amount; i++) {
     let polarity = -1;
-    polarity = Math.pow(polarity, i);
-    console.log(polarity);
-    stars += `${Math.floor(Math.random()*2000)}px ${Math.floor(Math.random()*2000)*polarity}px ${blur}px ${Colors.white}, `;
+    polarity **= i;
+    stars += `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000) * polarity}px ${blur}px ${Colors.white}, `;
   }
   return stars.slice(0, stars.length - 2);
 }
 
-export default class App extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <ParallaxStarSmall />
-        <ParallaxStarMedium />
-        <ParallaxStarLarge />
-        <WrapperMobile>
-          <Mobile />
-        </WrapperMobile>
-      </Wrapper>
-    );
-  }
-}
+const App = () => (
+  <Wrapper>
+    <ParallaxStarSmall />
+    <ParallaxStarMedium />
+    <ParallaxStarLarge />
+    <Name />
+    <WrapperMobile>
+      <Mobile />
+    </WrapperMobile>
+  </Wrapper>
+);
 
 const shootingStars = keyframes`
   from {
@@ -49,7 +47,6 @@ const Wrapper = styled.div`
 
 const ParallaxStar = styled.div`
   position: absolute;
-  z-index: 1000;
   top: 0%;
   left: 0%;
   color: transparent;
@@ -83,3 +80,5 @@ const WrapperMobile = Wrapper.extend`
     display: none;
   }
 `;
+
+export default App;
