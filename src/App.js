@@ -3,7 +3,6 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import Name from './Components/Name';
-import Mobile from './Components/Mobile';
 import Colors from './Components/Data/Colors';
 
 function starGenerator(amount, blur) {
@@ -22,9 +21,6 @@ const App = () => (
     <ParallaxStarMedium />
     <ParallaxStarLarge />
     <Name />
-    <WrapperMobile>
-      <Mobile />
-    </WrapperMobile>
   </Wrapper>
 );
 
@@ -72,13 +68,6 @@ const ParallaxStarLarge = ParallaxStar.extend`
   border-radius: 50%;
   box-shadow: ${starGenerator(100, 0)};
   animation: ${shootingStars} 25s linear infinite;
-`;
-
-const WrapperMobile = Wrapper.extend`
-  overflow: hidden;
-  @media (min-width: 1025px) {
-    display: none;
-  }
 `;
 
 export default App;
