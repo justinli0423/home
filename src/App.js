@@ -5,12 +5,24 @@ import styled from 'styled-components';
 // import Name from './Components/Name';
 import Menu from './Components/Menu';
 import Colors from './Components/Data/Colors';
+import MyInfo from './MyInfo';
+
+const myInfo = {
+  education: '// University of Waterloo - ECE',
+  currentJob: '// Web Applications Developer @ Dejero Labs',
+};
 
 const App = () => (
   <Wrapper
     className="db"
   >
     <Menu />
+    <MyInfo
+      textToType={myInfo.education}
+    />
+    <MyInfo
+      textToType={myInfo.currentJob}
+    />
   </Wrapper>
 );
 
