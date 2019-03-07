@@ -17,12 +17,16 @@ const App = () => (
     className="db"
   >
     <Menu />
-    <MyInfo
-      textToType={myInfo.education}
-    />
-    <MyInfo
-      textToType={myInfo.currentJob}
-    />
+    <span
+      className="dib mr5 mt5 f5 fr"
+    >
+      <MyInfo
+        textToType={myInfo.education}
+      />
+      <MyInfo
+        textToType={myInfo.currentJob}
+      />
+    </span>
   </Wrapper>
 );
 

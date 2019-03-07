@@ -43,7 +43,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <div>
+      <span>
         <span
           className="dib ml5 mt5 f3"
           role="button"
@@ -52,7 +52,7 @@ export default class Menu extends Component {
           { this.isMenuActive() }
           { this.renderMenu() }
         </span>
-      </div>
+      </span>
     );
   }
 }

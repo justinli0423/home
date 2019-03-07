@@ -27,8 +27,6 @@ export default class MyInfo extends Component {
         textToType,
       } = this.props;
 
-      console.log(textToType);
-
       if (!!textToType && typedCount <= textToType.length) {
         this.setState({
           textTyped: textToType.substring(0, typedCount),
@@ -71,26 +69,13 @@ export default class MyInfo extends Component {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   float: right;
   white-space: nowrap;
   font-family: 'Graduate', cursive;
-  color: ${Colors.white};
+  clear: both;
 `;
 
 const Caption = styled.div`
   font-size: 1em;
   margin: 0 auto;
-  padding: .3em;
-  @media (max-width: 1025px) {
-    font-size: .8em;
-  }
-  
-  &::after {
-    content: 'i';
-    color: transparent;
-    overflow: hidden;
-    font-size: 1px;
-  }
 `;
