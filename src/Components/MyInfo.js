@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Colors from './Components/Data/Colors';
+import Colors from './Data/Colors';
 
 export default class MyInfo extends Component {
   constructor(props) {
@@ -73,6 +73,7 @@ const Wrapper = styled.div`
   white-space: nowrap;
   font-family: 'Graduate', cursive;
   clear: both;
+  color: ${Colors.darkGrey};
 `;
 
 const Caption = styled.div`

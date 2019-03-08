@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import Colors from './Data/Colors';
+
 export default class Menu extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +45,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <span>
+      <Wrapper>
         <span
           className="dib ml5 mt5 f3"
           role="button"
@@ -52,7 +54,11 @@ export default class Menu extends Component {
           { this.isMenuActive() }
           { this.renderMenu() }
         </span>
-      </span>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.span`
+  color: ${Colors.darkGrey};
+`;
