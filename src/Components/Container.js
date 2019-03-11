@@ -1,25 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import Name from './Name';
 
 const Container = () => (
   <BigContainer
-    className="fl w-100 h-100"
+    className="absolute w-100 h-100 mt4"
   >
     <WrapperName
       className="fl h-75 w-30"
-    />
-    <WrapperInfo
+    >
+      <Name />
+    </WrapperName>
+    <WrapperContent
       className="fl h-75 w-70"
     />
   </BigContainer>
 );
 
 const WrapperName = styled.div`
-  background-color: black;
 `;
 
-const WrapperInfo = styled.div`
-  background-color: red;
+const WrapperContent = styled.div`
 `;
 
 const BigContainer = styled.div``;
