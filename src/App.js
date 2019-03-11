@@ -57,7 +57,7 @@ const App = () => (
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #1c1819;
+  background-color: ${Colors.background};
   /* maybe add after */
   /* background-image: url(./img/noiseBackground.png); */
 `;

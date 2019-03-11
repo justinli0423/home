@@ -5,21 +5,23 @@ import Colors from './Data/Colors';
 
 const Name = () => (
   <Wrapper
-    className="absolute ml5"
+    className="absolute ml5 fl flex flex-row"
   >
     <MyPic
-      className="dib mr2"
+      className="mr2 relative"
     />
-    <span>
+    <span
+      className="flex flex-column mt3"
+    >
       <MyName
-        className="dib f5"
+        className="f5"
       >
-      Justin Li
+        Justin Li
       </MyName>
       <MyTitle
-        className="dib f8 mt1"
+        className="f8 mt1"
       >
-      Web Developer
+        Web Developer
       </MyTitle>
     </span>
   </Wrapper>
