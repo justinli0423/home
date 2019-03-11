@@ -47,7 +47,7 @@ export default class Menu extends Component {
     return (
       <Wrapper>
         <span
-          className="dib ml5 mt5 f3"
+          className="dib f3"
           role="button"
           onClick={() => this.menuStateChanged(this)}
         >
