@@ -1,166 +1,73 @@
-import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable no-plusplus */
+import React from 'react';
+import styled from 'styled-components';
 
-import MainFrame from './Components/MainFrame';
-import WindowsBar from './Components/WindowsBar';
-import WindowsBootup from './Components/WindowsBootup';
-// import WindowsLogin from './Components/WindowsLogin';
-import Mobile from './Components/Mobile';
-
+// import Name from './Components/Name';
+import Menu from './Components/Menu';
 import Colors from './Components/Data/Colors';
+import MyInfo from './Components/MyInfo';
+import FooterLink from './Components/FooterLink';
+import Container from './Components/Container';
 
-function starCreator(num) {
-  const starArray = [];
-  for (let i = 0; i < num; i += 1) {
-    starArray.push(i);
-  }
+const myInfo = {
+  education: '// University of Waterloo - ECE',
+  currentJob: '// Web Applications Developer @ Dejero Labs',
+};
 
-  return starArray.map(() => <ParallaxStar />);
-}
-
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loadingState: 'startup',
-      cmdOpened: false,
-    };
-    this.positionRef = React.createRef();
-  }
-
-  startUpFinished(startupPercentage) {
-    if (startupPercentage === 150) {
-      this.setState({
-        loadingState: 'login',
-      });
-    }
-    if (startupPercentage === true) {
-      this.setState({
-        loadingState: 'mainScreen',
-      });
-    }
-  }
-
-  toggleCmd() {
-    const { cmdOpened } = this.state;
-    this.setState({
-      cmdOpened: !cmdOpened,
-    });
-  }
-
-  forceTurnOffCmd() {
-    this.setState({
-      cmdOpened: false,
-    });
-  }
-
-  render() {
-    const {
-      loadingState,
-      cmdOpened,
-    } = this.state;
-    return (
-      <Wrapper>
-        { starCreator(5) }
-        <WrapperDesktop>
-          {loadingState === 'startup'
-          && <WindowsBootup loadingStateFunc={(loadPercentage) => { this.startUpFinished(loadPercentage); }} />}
-          {/* {loadingState === 'login'
-          && <WindowsLogin loadingStateFunc={(loggedIn) => { this.startUpFinished(loggedIn); }} />} */}
-          {loadingState === 'login'
-          && cmdOpened
-          && <MainFrame exitFunction={() => { this.forceTurnOffCmd(); }} /> }
-          <WindowsBar
-            onLoadCmd={() => { this.toggleCmd(); }}
-            cmdToggleStatus={cmdOpened}
-          />
-        </WrapperDesktop>
-        <WrapperMobile>
-          <Mobile />
-        </WrapperMobile>
-      </Wrapper>
-    );
-  }
-}
-
-const parallaxStarsZoom = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-    animation-timing-function: ease-in;
-  } 
-  85% {
-    opacity: 1;
-    transform: scale(2.5);
-    animation-timing-function: linear;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3);
-  }
-`;
+const App = () => (
+  <Wrapper
+    className="db relative"
+  >
+    <Row
+      className="fl mt5 ml5 mr5 w-90 h-100 relative"
+    >
+      <Menu />
+      <span
+      className="dib f5 fr"
+      >
+        <MyInfo
+        textToType={myInfo.education}
+        />
+        <MyInfo
+        textToType={myInfo.currentJob}
+        />
+      </span>
+      <Container />
+      <FooterContainer
+      className="flex mb5 f7 w-100 absolute flex-row bottom-2 justify-end"
+      >
+        <FooterLink
+        caption="Github"
+        href="https://github.com/Jli0423"
+        />
+        <FooterLink
+        caption="Resume"
+        href="https://github.com/Jli0423/Resume/blob/master/JustinLiResume.pdf"
+        />
+        <FooterLink
+        caption="Linkedin"
+        href="https://www.linkedin.com/in/jli0423/"
+        />
+      </FooterContainer>
+    </Row>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
-  display: block;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(ellipse at bottom, ${Colors.spaceBlue} 0%, ${Colors.spaceBlack} 100%);
+  background-color: #1c1819;
+  /* maybe add after */
+  /* background-image: url(./img/noiseBackground.png); */
 `;
 
-const ParallaxStar = styled.div`
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-image: 
-    radial-gradient(1px 1px at 2em 3em, ${Colors.lightGrey}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 4em 7em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 5em 16em, ${Colors.lightGrey2}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 9em 4em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 13em 8em, ${Colors.white}, ${Colors.transparent}),
-    radial-gradient(1px 1px at 16em 12em, ${Colors.lightGrey2}, ${Colors.transparent});
-  background-repeat: repeat;
-  background-size: 20em 20em;
-  animation: ${parallaxStarsZoom} 9s infinite;
-  opacity: 0;
+const FooterContainer = styled.div`
 
-  &:nth-child(1) {
-  background-position: 50% 50%;
-  animation-delay: 0s;
-  }
-
-  &:nth-child(2) {
-    background-position: 20% 60%;
-    animation-delay: 1s;
-  }
-
-  &:nth-child(3) {
-    background-position: -20% -30%;
-    animation-delay: 2s;
-  }
-
-  &:nth-child(4) {
-    background-position: 40% -80%;
-    animation-delay: 3s;
-  }
-
-  &:nth-child(5) {
-    background-position: -20% 30%;
-    animation-delay: 4s;
-  }
 `;
 
-const WrapperDesktop = Wrapper.extend`
-  @media (max-width: 1024px) {
-    display: none;
-  }
+const Row = styled.div`
+
 `;
 
-const WrapperMobile = Wrapper.extend`
-  overflow: hidden;
-  @media (min-width: 1025px) {
-    display: none;
-  }
-`;
+export default App;
