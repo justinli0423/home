@@ -5,10 +5,10 @@ import Colors from './Data/Colors';
 
 const Name = () => (
   <Wrapper
-    className="absolute ml5 fl flex flex-row"
+    className="absolute ml4 fl flex flex-row"
   >
     <MyPic
-      className="mr2 relative"
+      className="mr3 relative"
     />
     <span
       className="flex flex-column mt3"

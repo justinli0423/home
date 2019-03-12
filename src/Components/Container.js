@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Name from './Name';
 
 import Colors from './Data/Colors';
+import RoundButton from './Modules/RoundButton';
 
 const Container = () => (
   <BigContainer
@@ -13,6 +14,12 @@ const Container = () => (
     >
       <Name />
     </WrapperName>
+    <ButtonWrapper
+      className="absolute flex flex-column"
+    >
+      <RoundButton up />
+      <RoundButton down />
+    </ButtonWrapper>
     <WrapperContent
       className="fl h-75 w-70"
     />
@@ -50,5 +57,11 @@ const WrapperContent = styled.div`
 `;
 
 const BigContainer = styled.div``;
+
+const ButtonWrapper = styled.div`
+  left: 30%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+`;
 
 export default Container;
