@@ -22,7 +22,7 @@ const Title = props => (
 
 const Wrapper = styled.h1`
   color: ${Colors.white};
-  margin-top: 25%;
+  top: 35%;
   font-family: 'Graduate', cursive;
 `;
 

@@ -3,7 +3,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import Name from './Components/Name';
 import Menu from './Components/Menu';
 import Colors from './Components/Data/Colors';
 import MyInfo from './Components/MyInfo';

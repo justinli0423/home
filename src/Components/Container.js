@@ -5,44 +5,68 @@ import Name from './Name';
 import Colors from './Data/Colors';
 import RoundButton from './Modules/RoundButton';
 import Title from './Title';
+import Experience from './Experience';
 
 export default class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageNum: 1,
+      pageNum: 2,
     };
   }
 
   pageUp() {
     const { pageNum } = this.state;
     this.setState({
-      pageNum: pageNum + 1 > 3 ? 1 : pageNum + 1,
+      pageNum: pageNum + 1 > 2 ? 1 : pageNum + 1,
     });
   }
 
   pageDown() {
     const { pageNum } = this.state;
     this.setState({
-      pageNum: pageNum - 1 < 1 ? 3 : pageNum - 1,
+      pageNum: pageNum - 1 < 1 ? 2 : pageNum - 1,
     });
   }
 
   renderFrontPage() {
     return (
-      <div></div>
+      <Title
+        title="Welcome"
+        caption="Self-Proclaimed web developer, bubble Tea Addict, Badminton Fanatic."
+      />
+    );
+  }
+
+  // renderProjectsPage() {
+  //   return (
+  //     <Title
+  //       title="Projects"
+  //     />
+  //   );
+  // }
+
+  renderJobsPage() {
+    return (
+      <div
+        className="w-100 h-100 relative"
+      >
+        <Title
+          title="Experience"
+        />
+        <Experience />
+      </div>
     );
   }
 
   render() {
     const { pageNum } = this.state;
-    console.log(pageNum);
     return (
       <BigContainer
         className="absolute w-100 h-100 mt4"
       >
         <WrapperName
-          className="fl h-75 w-30 relative"
+          className="fl h-75 w-25 relative"
         >
           <Name />
         </WrapperName>
@@ -59,13 +83,13 @@ export default class Container extends Component {
           />
         </ButtonWrapper>
         <WrapperContent
-          className="fl h-75 w-70"
+          className="fl h-75 w-75"
         >
-          <Title
-            title="Welcome"
-            caption="Self-Proclaimed web developer, bubble Tea Addict, Badminton Fanatic."
-          />
+          { pageNum === 1 && this.renderFrontPage()}
+          {/* { pageNum === 2 && this.renderProjectsPage()} */}
+          { pageNum === 2 && this.renderJobsPage()}
         </WrapperContent>
+
       </BigContainer>
     );
   }
@@ -102,13 +126,8 @@ const WrapperContent = styled.div`
 
 const BigContainer = styled.div``;
 
-const BtnWrap = styled.div`
-  width: 4em;
-  height: 4em;
-`;
-
 const ButtonWrapper = styled.div`
-  left: 30%;
+  left: 25%;
   top: 70%;
   transform: translate(-50%, -50%);
 `;
