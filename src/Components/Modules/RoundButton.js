@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -5,7 +6,8 @@ import Colors from '../Data/Colors';
 
 const RoundButton = props => (
   <Wrapper
-    className="relative ma2"
+    className="ma2 relative"
+    onClick={props.onClick}
   >
     { props.up && <i className="fas fa-chevron-up" /> }
     { props.down && <i className="fas fa-chevron-down" /> }
@@ -20,6 +22,9 @@ const Wrapper = styled.a`
   transition: all .5s;
   &:hover {
     background-color: rgba(255, 255, 255, .5);
+  }
+  &:active {
+    background-color: white;
   }
   & i {
     position: absolute;
