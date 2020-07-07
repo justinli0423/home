@@ -5,7 +5,7 @@
   "homepage": "https://justinli0423.github.io/home",
   "dependencies": {
     "i": "^0.3.6",
-    "npm": "^6.9.0",
+    "npm": "^6.14.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
