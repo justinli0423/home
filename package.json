@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://justinli0423.github.io/home",
   "dependencies": {
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "npm": "^6.9.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
